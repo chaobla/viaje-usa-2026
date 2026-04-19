@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USA 2026 &middot; Orlando &amp; Nueva York</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       DESIGN TOKENS ‚Äî Airbnb Design System
+       ============================================ */
+    :root {
+      /* Typography */
+      --font-cereal: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+
+      /* Airbnb core palette */
+      --rausch: #ff385c;          /* Airbnb brand red */
+      --rausch-dark: #e31c5f;
+      --rausch-soft: #fff1f3;
+
+      /* Warm neutrals */
+      --hof: #222222;             /* Near-black ‚Äî primary text */
+      --foggy: #717171;           /* Secondary text */
+      --babu: #484848;            /* Medium text */
+      --arches: #c13515;          /* Deep red accent */
+      --beach: #ffb400;           /* Rating gold */
+
+      /* Surfaces */
+      --canvas: #ffffff;          /* Pure white */
+      --surface: #f7f7f7;         /* Warm off-white */
+      --surface-alt: #faf8f5;     /* Sand tone */
+      --border: #ebebeb;          /* Hairline border */
+      --border-hover: #222222;
+
+      /* Airbnb 3-layer shadow system */
+      --shadow-card:
+        rgba(0,0,0,0.02) 0px 0px 0px 1px,
+        rgba(0,0,0,0.04) 0px 2px 6px 0px,
+        rgba(0,0,0,0.1) 0px 4px 8px -4px;
+      --shadow-card-hover:
+        rgba(0,0,0,0.04) 0px 0px 0px 1px,
+        rgba(0,0,0,0.12) 0px 6px 16px 0px,
+        rgba(0,0,0,0.18) 0px 10px 24px -8px;
+      --shadow-sticky:
+        rgba(0,0,0,0.08) 0px 1px 2px 0px,
+        rgba(0,0,0,0.04) 0px 4px 12px 0px;
+
+      /* Radii */
+      --r-btn: 8px;
+      --r-pill: 999px;
+      --r-badge: 14px;
+      --r-card: 20px;
+      --r-xl: 32px;
+
+      /* Container */
+      --max-w: 1180px;
+    }
+
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-cereal);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--hof);
+      background: var(--canvas);
+      letter-spacing: -0.01em;
+      width: 100%;
+      max-width: 100vw;
+      -webkit-tap-highlight-color: rgba(255,56,92,0.15);
+    }
+
+    button, a { touch-action: manipulation; }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: var(--hof);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: var(--rausch);
+    }
+
+    code {
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.9em;
+      background: var(--surface);
+      padding: 2px 8px;
+      border-radius: 6px;
+      letter-spacing: 0;
+    }
+
+    /* ============================================
+       NAVIGATION ‚Äî Airbnb sticky nav
+       ============================================ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      position: relative;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      color: var(--rausch);
+      white-space: nowrap;
+    }
+
+    .nav-brand-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--rausch);
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 1C11.6 1 7.9 4.7 7.9 9.1c0 1.5.4 3.3 1.1 4.9L16 31l7-17c.7-1.6 1.1-3.4 1.1-4.9C24.1 4.7 20.4 1 16 1zm0 11.7a3.7 3.7 0 110-7.4 3.7 3.7 0 010 7.4z' fill='currentColor'/></svg>") center/contain no-repeat;
+              mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 1C11.6 1 7.9 4.7 7.9 9.1c0 1.5.4 3.3 1.1 4.9L16 31l7-17c.7-1.6 1.1-3.4 1.1-4.9C24.1 4.7 20.4 1 16 1zm0 11.7a3.7 3.7 0 110-7.4 3.7 3.7 0 010 7.4z' fill='currentColor'/></svg>") center/contain no-repeat;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2px;
+      list-style: none;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-links a {
+      display: block;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--hof);
+      text-decoration: none;
+      border-radius: var(--r-pill);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .nav-links a:hover {
+      background: var(--surface);
+      color: var(--hof);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--r-pill);
+      cursor: pointer;
+      padding: 10px 12px;
+      min-width: 44px;
+      min-height: 40px;
+    }
+
+    .nav-toggle:hover { border-color: var(--hof); }
+
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--hof);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .nav-toggle.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    @media (max-width: 900px) {
+      .nav-inner { padding: 14px 22px; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--canvas);
+        flex-direction: column;
+        padding: 12px;
+        gap: 4px;
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sticky);
+      }
+      .nav-links.active { display: flex; }
+      .nav-toggle { display: inline-flex; }
+      .nav-links a { font-size: 15px; padding: 12px 16px; }
+    }
+
+    /* ============================================
+       HERO ‚Äî Photography-first
+       ============================================ */
+    .hero {
+      position: relative;
+      height: 640px;
+      max-height: 85vh;
+      margin: 20px 20px 0;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 30% 20%, #ff7a5c 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 80%, #ff385c 0%, transparent 60%),
+        linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+    }
+
+    @media (max-width: 700px) {
+      .hero { height: 520px; margin: 12px 12px 0; border-radius: var(--r-card); }
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: url("https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1920&q=85&auto=format&fit=crop") center/cover no-repeat;
+      transform: scale(1.02);
+      transition: transform 8s ease-out;
+    }
+
+    .hero:hover .hero-bg { transform: scale(1.08); }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.65) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: absolute;
+      left: 48px;
+      right: 48px;
+      bottom: 48px;
+      z-index: 2;
+      color: #fff;
+    }
+
+    @media (max-width: 700px) {
+      .hero-content { left: 24px; right: 24px; bottom: 28px; }
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.18);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      padding: 8px 14px;
+      border-radius: var(--r-pill);
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .hero-title {
+      font-size: clamp(42px, 7vw, 88px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      max-width: 640px;
+      opacity: 0.92;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: rgba(255,255,255,0.95);
+      color: var(--hof);
+      border-radius: var(--r-pill);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--rausch);
+    }
+
+    /* ============================================
+       SECTION BASE
+       ============================================ */
+    .section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    @media (max-width: 700px) {
+      .section { padding: 56px 22px; }
+    }
+
+    .section-head {
+      margin-bottom: 40px;
+      max-width: 720px;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rausch);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--hof);
+      margin-bottom: 12px;
+    }
+
+    .section-lead {
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--foggy);
+    }
+
+    /* ============================================
+       STATS STRIP
+       ============================================ */
+    .stats {
+      max-width: var(--max-w);
+      margin: 48px auto 0;
+      padding: 0 40px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      overflow: hidden;
+    }
+
+    @media (max-width: 700px) {
+      .stats { padding: 0 22px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat {
+      padding: 28px 24px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    @media (max-width: 700px) {
+      .stat:nth-child(2n) { border-right: none; }
+      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+    }
+
+    .stat-num {
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--hof);
+    }
+
+    .stat-label {
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--foggy);
+      letter-spacing: -0.005em;
+    }
+
+    /* ============================================
+       TIMELINE ‚Äî Airbnb style itinerary
+       ============================================ */
+    .timeline {
+      position: relative;
+      margin-top: 8px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 18px;
+      bottom: 18px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    @media (max-width: 700px) {
+      .timeline::before { left: 15px; }
+    }
+
+    .tl-item {
+      position: relative;
+      padding: 0 0 36px 64px;
+    }
+
+    @media (max-width: 700px) {
+      .tl-item { padding-left: 48px; }
+    }
+
+    .tl-item:last-child { padding-bottom: 0; }
+
+    .tl-dot {
+      position: absolute;
+      left: 10px;
+      top: 4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--canvas);
+      border: 3px solid var(--rausch);
+      box-shadow: 0 0 0 4px var(--canvas);
+    }
+
+    @media (max-width: 700px) {
+      .tl-dot { left: 6px; }
+    }
+
+    .tl-dot--stay {
+      border-color: var(--hof);
+    }
+
+    .tl-date {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--foggy);
+      margin-bottom: 8px;
+    }
+
+    .tl-title {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--hof);
+      margin-bottom: 10px;
+    }
+
+    .tl-body {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--babu);
+      max-width: 620px;
+    }
+
+    .tl-body strong {
+      color: var(--hof);
+      font-weight: 600;
+    }
+
+    .tl-tag {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--rausch);
+      background: var(--rausch-soft);
+      border-radius: var(--r-pill);
+      letter-spacing: -0.005em;
+    }
+
+    .tl-tag--stay {
+      color: var(--hof);
+      background: var(--surface);
+    }
+
+    .tl-image {
+      margin-top: 18px;
+      border-radius: var(--r-badge);
+      overflow: hidden;
+      max-width: 640px;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #ff9a7b 0%, #ff385c 50%, #c13515 100%);
+    }
+
+    .tl-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .tl-item:hover .tl-image img { transform: scale(1.03); }
+
+    /* ============================================
+       FLIGHT CARDS
+       ============================================ */
+    .flights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .flights-grid { grid-template-columns: 1fr; }
+    }
+
+    .flight-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .flight-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .flight-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      gap: 12px;
+    }
+
+    .flight-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--hof);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: var(--r-pill);
+    }
+
+    .flight-chip--return {
+      background: var(--rausch);
+    }
+
+    .flight-date {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--foggy);
+      letter-spacing: -0.005em;
+    }
+
+    .flight-airline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--babu);
+      margin-bottom: 20px;
+    }
+
+    .flight-airline-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rausch);
+    }
+
+    .flight-route {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: var(--surface-alt);
+      border-radius: var(--r-badge);
+      margin-bottom: 20px;
+    }
+
+    .flight-point {
+      text-align: center;
+    }
+
+    .flight-code {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--hof);
+      line-height: 1;
+    }
+
+    .flight-time {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--hof);
+      margin-top: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .flight-time sup {
+      font-size: 11px;
+      color: var(--rausch);
+      vertical-align: super;
+    }
+
+    .flight-city {
+      font-size: 12px;
+      color: var(--foggy);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .flight-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-width: 60px;
+      height: 28px;
+      color: var(--foggy);
+    }
+
+    .flight-line::before,
+    .flight-line::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      height: 1.5px;
+      background: var(--border-hover);
+      opacity: 0.35;
+    }
+
+    .flight-line::before { left: 0; right: 54%; }
+    .flight-line::after { left: 54%; right: 0; }
+
+    .flight-line svg {
+      position: relative;
+      z-index: 1;
+      width: 22px;
+      height: 22px;
+      color: var(--rausch);
+      background: var(--surface-alt);
+      border-radius: 50%;
+      padding: 2px;
+    }
+
+    .flight-specs {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .flight-specs li {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--babu);
+    }
+
+    .flight-specs li strong {
+      color: var(--hof);
+      font-weight: 600;
+    }
+
+    @media (max-width: 500px) {
+      .flight-specs li {
+        grid-template-columns: 1fr;
+        gap: 2px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+      .flight-specs li:last-child { border: none; }
+    }
+
+    .flight-note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      background: var(--surface);
+      border-radius: var(--r-badge);
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--babu);
+    }
+
+    .flight-note strong { color: var(--hof); font-weight: 600; }
+
+    .flight-summary {
+      margin-top: 24px;
+      padding: 20px 24px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--babu);
+    }
+
+    .flight-summary strong { color: var(--hof); font-weight: 700; }
+
+    /* ============================================
+       HOTELS ‚Äî Photography-first cards
+       ============================================ */
+    .hotels-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    @media (max-width: 900px) {
+      .hotels-grid { grid-template-columns: 1fr; }
+    }
+
+    .hotel-card {
+      background: var(--canvas);
+      border-radius: var(--r-card);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .hotel-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-3px);
+    }
+
+    .hotel-image {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ffb400 0%, #ff7a5c 50%, #ff385c 100%);
+    }
+
+    .hotel-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .hotel-card:hover .hotel-image img { transform: scale(1.04); }
+
+    .hotel-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.95);
+      color: var(--hof);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: var(--r-pill);
+      box-shadow: var(--shadow-sticky);
+    }
+
+    .hotel-fav {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rausch);
+      box-shadow: var(--shadow-sticky);
+    }
+
+    .hotel-body {
+      padding: 24px 26px 28px;
+    }
+
+    .hotel-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--hof);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .hotel-addr {
+      font-size: 14px;
+      color: var(--foggy);
+      margin-bottom: 16px;
+    }
+
+    .hotel-addr a { color: var(--foggy); }
+
+    .hotel-specs {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .hotel-specs li {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--babu);
+    }
+
+    .hotel-specs li strong {
+      color: var(--hof);
+      font-weight: 600;
+    }
+
+    .amenities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .amenity {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      background: var(--surface);
+      color: var(--hof);
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: var(--r-pill);
+      letter-spacing: -0.005em;
+    }
+
+    .hotel-price {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hotel-price-amount {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--hof);
+      letter-spacing: -0.02em;
+    }
+
+    .hotel-price-note {
+      font-size: 13px;
+      color: var(--foggy);
+      font-weight: 500;
+    }
+
+    /* ============================================
+       ALERTS
+       ============================================ */
+    .alerts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+    }
+
+    .alert {
+      display: flex;
+      gap: 16px;
+      padding: 22px 24px;
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      transition: box-shadow 0.25s;
+    }
+
+    .alert:hover { box-shadow: var(--shadow-card); }
+
+    .alert--hot { border-left: 4px solid var(--rausch); }
+    .alert--warn { border-left: 4px solid var(--beach); }
+    .alert--ok { border-left: 4px solid #2e8b57; }
+
+    .alert-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--surface);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .alert-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--hof);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+
+    .alert-body {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--babu);
+    }
+
+    /* ============================================
+       REFERENCES
+       ============================================ */
+    .refs-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 28px;
+    }
+
+    @media (max-width: 900px) {
+      .refs-grid { grid-template-columns: 1fr; }
+    }
+
+    .ref-block {
+      padding: 24px 26px;
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      margin-bottom: 18px;
+    }
+
+    .ref-block:last-child { margin-bottom: 0; }
+
+    .ref-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--hof);
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ref-title::before {
+      content: "";
+      width: 4px;
+      height: 16px;
+      background: var(--rausch);
+      border-radius: 2px;
+    }
+
+    .ref-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .ref-list li {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--babu);
+    }
+
+    .ref-list li strong {
+      color: var(--hof);
+      font-weight: 600;
+    }
+
+    .emergency {
+      background: var(--hof);
+      color: #fff;
+      padding: 28px 26px;
+      border-radius: var(--r-card);
+      position: sticky;
+      top: 100px;
+    }
+
+    .emergency .ref-title {
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .emergency .ref-title::before { background: var(--rausch); }
+
+    .emergency-list {
+      list-style: none;
+      display: grid;
+      gap: 16px;
+    }
+
+    .emergency-list li {
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.85);
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .emergency-list li:last-child { border: none; padding-bottom: 0; }
+
+    .emergency-list li strong {
+      display: block;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+      font-size: 14px;
+    }
+
+    /* ============================================
+       CHECKLIST
+       ============================================ */
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .check-card {
+      padding: 22px 24px;
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      transition: box-shadow 0.25s;
+    }
+
+    .check-card:hover { box-shadow: var(--shadow-card); }
+
+    .check-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--hof);
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--babu);
+      line-height: 1.4;
+    }
+
+    .check-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .check-icon--done {
+      background: #2e8b57;
+      color: #fff;
+    }
+
+    .check-icon--pending {
+      background: var(--rausch);
+      color: #fff;
+    }
+
+    .check-icon--assess {
+      background: var(--beach);
+      color: #fff;
+    }
+
+    /* ============================================
+       BUDGET
+       ============================================ */
+    .budget-hero {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 0;
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 700px) {
+      .budget-hero { grid-template-columns: 1fr; }
+    }
+
+    .budget-total {
+      padding: 36px 32px;
+      background: var(--hof);
+      color: #fff;
+    }
+
+    .budget-total-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+
+    .budget-total-num {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .budget-total-note {
+      font-size: 13px;
+      line-height: 1.5;
+      opacity: 0.75;
+    }
+
+    .budget-bar-wrap {
+      padding: 36px 32px;
+    }
+
+    .budget-bar-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--hof);
+      margin-bottom: 18px;
+    }
+
+    .budget-bar {
+      width: 100%;
+      height: 10px;
+      background: var(--surface);
+      border-radius: var(--r-pill);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .budget-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--rausch) 0%, var(--arches) 100%);
+      border-radius: var(--r-pill);
+      transition: width 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .budget-bar-fill.animate { width: 70%; }
+
+    .budget-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--foggy);
+    }
+
+    .budget-table {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      overflow: hidden;
+    }
+
+    .budget-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 26px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .budget-row:last-child { border-bottom: none; }
+    .budget-row:hover { background: var(--surface); }
+
+    .budget-item {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--hof);
+      letter-spacing: -0.005em;
+    }
+
+    .budget-amount {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--hof);
+      letter-spacing: -0.01em;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .budget-amount--refund { color: #2e8b57; }
+    .budget-amount--pending { color: var(--foggy); font-weight: 500; }
+
+    /* ============================================
+       FULL-BLEED IMAGE BREAK
+       ============================================ */
+    .image-break {
+      margin: 0 20px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 21/8;
+      background: linear-gradient(120deg, #1a1a2e 0%, #c13515 50%, #ff385c 100%);
+    }
+
+    @media (max-width: 700px) {
+      .image-break { margin: 0 12px; border-radius: var(--r-card); aspect-ratio: 16/10; }
+    }
+
+    .image-break img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 6s ease-out;
+    }
+
+    .image-break:hover img { transform: scale(1.04); }
+
+    .image-break-caption {
+      position: absolute;
+      left: 36px;
+      bottom: 32px;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 700px) {
+      .image-break-caption { left: 22px; bottom: 22px; font-size: 18px; }
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      margin-top: 40px;
+      border-top: 1px solid var(--border);
+      padding: 48px 40px;
+      text-align: center;
+      background: var(--surface-alt);
+    }
+
+    .footer-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--hof);
+      margin-bottom: 6px;
+    }
+
+    .footer-sub {
+      font-size: 14px;
+      color: var(--foggy);
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      color: var(--rausch);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .footer-brand-mark {
+      width: 16px;
+      height: 16px;
+      background: var(--rausch);
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 1C11.6 1 7.9 4.7 7.9 9.1c0 1.5.4 3.3 1.1 4.9L16 31l7-17c.7-1.6 1.1-3.4 1.1-4.9C24.1 4.7 20.4 1 16 1zm0 11.7a3.7 3.7 0 110-7.4 3.7 3.7 0 010 7.4z' fill='currentColor'/></svg>") center/contain no-repeat;
+              mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 1C11.6 1 7.9 4.7 7.9 9.1c0 1.5.4 3.3 1.1 4.9L16 31l7-17c.7-1.6 1.1-3.4 1.1-4.9C24.1 4.7 20.4 1 16 1zm0 11.7a3.7 3.7 0 110-7.4 3.7 3.7 0 010 7.4z' fill='currentColor'/></svg>") center/contain no-repeat;
+    }
+
+    /* ============================================
+       RESPONSIVE REFINEMENTS ‚Äî tablet & mobile
+       ============================================ */
+
+    /* Tablet y m√≥viles medianos */
+    @media (max-width: 700px) {
+      .nav-inner { padding: 14px 18px; gap: 12px; }
+      .nav-brand { font-size: 18px; gap: 8px; }
+      .nav-brand-mark { width: 24px; height: 24px; }
+
+      .hero-content { left: 22px; right: 22px; bottom: 26px; }
+      .hero-kicker { font-size: 11px; padding: 7px 12px; margin-bottom: 16px; }
+      .hero-meta { gap: 8px; margin-top: 22px; }
+      .hero-pill { padding: 8px 14px; font-size: 12px; }
+
+      .section { padding: 48px 20px; }
+      .section-head { margin-bottom: 28px; }
+      .stats { padding: 0 20px; margin-top: 32px; }
+      .stat { padding: 22px 16px; }
+      .stat-num { font-size: 32px; }
+
+      .flight-card { padding: 22px 20px; }
+      .flight-route { padding: 16px 14px; gap: 10px; border-radius: 12px; }
+      .flight-code { font-size: 24px; }
+      .flight-time { font-size: 15px; margin-top: 4px; }
+      .flight-city { font-size: 11px; }
+      .flight-line { min-width: 36px; }
+      .flight-line svg { width: 18px; height: 18px; }
+      .flight-specs li {
+        grid-template-columns: 1fr;
+        gap: 2px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border);
+      }
+      .flight-specs li:last-child { border: none; padding-bottom: 0; }
+      .flight-note { padding: 14px 16px; font-size: 13px; }
+      .flight-summary { padding: 18px 20px; font-size: 13px; }
+
+      .hotel-body { padding: 20px 20px 22px; }
+      .hotel-title { font-size: 20px; }
+      .hotel-price-amount { font-size: 22px; }
+      .hotel-badge { padding: 6px 11px; font-size: 11px; top: 12px; left: 12px; }
+      .hotel-fav { top: 12px; right: 12px; width: 32px; height: 32px; }
+
+      .alerts-grid { grid-template-columns: 1fr; gap: 14px; }
+      .alert { padding: 18px 18px; gap: 14px; }
+      .alert-icon { width: 36px; height: 36px; font-size: 16px; }
+
+      .check-grid { grid-template-columns: 1fr; gap: 14px; }
+      .check-card { padding: 18px 20px; }
+
+      .refs-grid { gap: 18px; }
+      .ref-block { padding: 20px 20px; }
+      .emergency { padding: 22px 20px; position: static; top: auto; }
+
+      .budget-total { padding: 26px 22px; }
+      .budget-total-num { font-size: 36px; }
+      .budget-bar-wrap { padding: 26px 22px; }
+      .budget-row {
+        flex-wrap: wrap;
+        padding: 14px 18px;
+        gap: 6px 12px;
+      }
+      .budget-item, .budget-amount { font-size: 14px; }
+
+      .tl-item { padding: 0 0 28px 44px; }
+      .tl-title { font-size: 19px; }
+      .tl-body { font-size: 14px; }
+
+      .footer { padding: 36px 22px; margin-top: 24px; }
+    }
+
+    /* M√≥viles peque√±os (iPhone SE, Galaxy) */
+    @media (max-width: 420px) {
+      .hero { height: 460px; margin: 10px 10px 0; }
+      .hero-content { left: 18px; right: 18px; bottom: 22px; }
+      .hero-title { font-size: 36px; letter-spacing: -0.03em; }
+      .hero-subtitle { font-size: 15px; }
+      .hero-pill { padding: 7px 12px; font-size: 11px; }
+
+      .section { padding: 40px 16px; }
+      .stats { padding: 0 16px; }
+      .stats-grid { border-radius: 16px; }
+      .stat { padding: 18px 10px; }
+      .stat-num { font-size: 28px; }
+      .stat-label { font-size: 12px; }
+
+      .flight-card { padding: 18px 16px; }
+      .flight-route { grid-template-columns: 1fr 40px 1fr; padding: 14px 10px; gap: 6px; }
+      .flight-code { font-size: 20px; }
+      .flight-time { font-size: 14px; }
+      .flight-line { min-width: 30px; }
+
+      .nav-brand { font-size: 16px; }
+      .nav-brand-mark { width: 22px; height: 22px; }
+      .nav-inner { padding: 12px 14px; }
+
+      .section-title { font-size: 26px; }
+      .hotel-title { font-size: 18px; }
+      .budget-total-num { font-size: 30px; }
+      .image-break-caption { left: 16px; bottom: 16px; font-size: 15px; }
+    }
+
+    /* ============================================
+       REVEAL ANIMATION
+       ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal.visible {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .hero-bg, .hotel-image img, .tl-image img, .image-break img {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVIGATION
+       ========================================== -->
+  <nav class="nav" role="navigation">
+    <div class="nav-inner">
+      <span class="nav-brand">
+        <span class="nav-brand-mark" aria-hidden="true"></span>
+        USA 2026
+      </span>
+      <button class="nav-toggle" id="navToggle" aria-label="Men&uacute;" aria-expanded="false" aria-controls="navLinks" type="button">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#itinerario">Itinerario</a></li>
+        <li><a href="#vuelos">Vuelos</a></li>
+        <li><a href="#hoteles">Hoteles</a></li>
+        <li><a href="#alertas">Alertas</a></li>
+        <li><a href="#referencias">Referencias</a></li>
+        <li><a href="#checklist">Checklist</a></li>
+        <li><a href="#presupuesto">Presupuesto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ==========================================
+       HERO
+       ========================================== -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <span class="hero-kicker">28 sept &mdash; 8 octubre 2026</span>
+      <h1 class="hero-title">USA 2026</h1>
+      <p class="hero-subtitle">Diez d&iacute;as entre los parques de Orlando y la vibraci&oacute;n de Times Square. Un viaje cuidadosamente preparado para Jose Ricardo y Beatriz.</p>
+      <div class="hero-meta">
+        <span class="hero-pill"><span class="hero-pill-dot"></span>Madrid &middot; Orlando &middot; Nueva York</span>
+        <span class="hero-pill">4 vuelos</span>
+        <span class="hero-pill">9 noches de hotel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       STATS
+       ========================================== -->
+  <div class="stats">
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <div class="stat-num">10</div>
+        <div class="stat-label">D&iacute;as de viaje</div>
+      </div>
+      <div class="stat reveal reveal-delay-1">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Ciudades</div>
+      </div>
+      <div class="stat reveal reveal-delay-2">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Vuelos</div>
+      </div>
+      <div class="stat reveal reveal-delay-3">
+        <div class="stat-num">9</div>
+        <div class="stat-label">Noches de hotel</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       ITINERARIO
+       ========================================== -->
+  <section id="itinerario" class="section">
+    <div class="section-head">
+      <span class="section-kicker reveal">Planificaci&oacute;n</span>
+      <h2 class="section-title reveal">El itinerario, d&iacute;a a d&iacute;a</h2>
+      <p class="section-lead reveal">Un plan que arranca al amanecer del 28 de septiembre en Barajas y termina diez d&iacute;as despu&eacute;s de vuelta en Madrid. Entre medias, cuatro noches de parques y cinco de ciudad.</p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <div class="tl-date">Lunes 28 septiembre</div>
+        <div class="tl-title">Madrid &rarr; Nueva York &rarr; Orlando</div>
+        <div class="tl-body">
+          <strong>IB4001</strong> sale de MAD T4S a las 10:25 y aterriza en JFK T8 a las 12:25. Tras inmigraci&oacute;n, enlace AirTrain al T5 y embarque en <strong>JetBlue B60283</strong> a las 20:45 rumbo a Orlando (MCO 23:51). Llegada al Sheraton hacia las 00:30 de madrugada.
+        </div>
+        <span class="tl-tag">D&iacute;a de viaje</span>
+        <div class="tl-image">
+          <img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?w=1600&q=85&auto=format&fit=crop" alt="Avi&oacute;n aterrizando al atardecer" loading="lazy">
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot tl-dot--stay"></span>
+        <div class="tl-date">29 septiembre &ndash; 1 octubre</div>
+        <div class="tl-title">Orlando &middot; Disney y parques</div>
+        <div class="tl-body">
+          Tres d&iacute;as completos con base en el <strong>Sheraton Orlando Lake Buena Vista Resort</strong>. Transporte gratuito a los parques Disney incluido en el resort fee, cr&eacute;dito diario de $10 para comida y bebida, y actividades del hotel.
+        </div>
+        <span class="tl-tag tl-tag--stay">4 noches</span>
+        <div class="tl-image">
+          <img src="https://images.unsplash.com/photo-1597466599360-3b9775841aec?w=1600&q=85&auto=format&fit=crop" alt="Castillo de Disney World al anochecer" loading="lazy">
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <div class="tl-date">Viernes 2 octubre</div>
+        <div class="tl-title">Orlando &rarr; Nueva York</div>
+        <div class="tl-body">
+          Check-out temprano en el Sheraton (antes de las 07:00). <strong>JetBlue B60384</strong> despega de MCO Terminal C a las 09:30 y aterriza en JFK T5 a las 12:05. Llegada al Motto by Hilton hacia las 13:30 con la tarde libre para pasear Times Square.
+        </div>
+        <span class="tl-tag">D&iacute;a de viaje</span>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot tl-dot--stay"></span>
+        <div class="tl-date">2 &ndash; 7 octubre</div>
+        <div class="tl-title">Nueva York &middot; Times Square</div>
+        <div class="tl-body">
+          Cinco noches completas en el <strong>Motto By Hilton NYC Times Square</strong>, en el 152 West 48th Street. Base perfecta para explorar Midtown a pie: Central Park, MoMA, Top of the Rock, Broadway y el High Line a quince minutos andando.
+        </div>
+        <span class="tl-tag tl-tag--stay">5 noches</span>
+        <div class="tl-image">
+          <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=1600&q=85&auto=format&fit=crop" alt="Times Square de noche con carteles luminosos" loading="lazy">
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <div class="tl-date">Mi&eacute;rcoles 7 octubre</div>
+        <div class="tl-title">Nueva York &rarr; Madrid</div>
+        <div class="tl-body">
+          Check-out del Motto a las 11:00 y d&iacute;a libre en la ciudad. <strong>IB0326</strong> despega de JFK T8 a las 20:40 y aterriza en Madrid T4S a las 10:15 del jueves 8 de octubre tras 7h 35min de vuelo directo.
+        </div>
+        <span class="tl-tag">Regreso</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FULL-BLEED IMAGE BREAK
+       ========================================== -->
+  <div class="image-break reveal">
+    <img src="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?w=1920&q=85&auto=format&fit=crop" alt="Empire State Building desde el skyline de Nueva York" loading="lazy">
+    <div class="image-break-caption">Midtown Manhattan</div>
+  </div>
+
+  <!-- ==========================================
+       VUELOS INTERNACIONALES
+       ========================================== -->
+  <section id="vuelos" class="section">
+    <div class="section-head">
+      <span class="section-kicker reveal">Transporte</span>
+      <h2 class="section-title reveal">Vuelos internacionales</h2>
+      <p class="section-lead reveal">Iberia y American Airlines cubren el trayecto transatl&aacute;ntico. Reservado a trav&eacute;s de Viajes El Corte Ingl&eacute;s con el localizador <strong>K01BD</strong>.</p>
+    </div>
+
+    <div class="flights-grid">
+
+      <div class="flight-card reveal">
+        <div class="flight-head">
+          <span class="flight-chip">Ida</span>
+          <span class="flight-date">Lunes 28 septiembre 2026</span>
+        </div>
+        <div class="flight-airline"><span class="flight-airline-dot"></span>Iberia / American Airlines</div>
+
+        <div class="flight-route">
+          <div class="flight-point">
+            <div class="flight-code">MAD</div>
+            <div class="flight-time">10:25</div>
+            <div class="flight-city">Madrid T4S</div>
+          </div>
+          <div class="flight-line">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="flight-point">
+            <div class="flight-code">JFK</div>
+            <div class="flight-time">12:25</div>
+            <div class="flight-city">Terminal 8</div>
+          </div>
+        </div>
+
+        <ul class="flight-specs">
+          <li><strong>Vuelo</strong><span>IB4001 &middot; operado por American Airlines</span></li>
+          <li><strong>Duraci&oacute;n</strong><span>8h 00min &middot; Directo</span></li>
+          <li><strong>Localizador</strong><span><code>K01BD</code></span></li>
+          <li><strong>Clase</strong><span>Turista &middot; Tarifa B&aacute;sica &middot; No reembolsable</span></li>
+          <li><strong>Cambio</strong><span>150&euro; de penalizaci&oacute;n</span></li>
+          <li><strong>Maleta facturada</strong><span>No incluida en tarifa b&aacute;sica</span></li>
+        </ul>
+      </div>
+
+      <div class="flight-card reveal reveal-delay-1">
+        <div class="flight-head">
+          <span class="flight-chip flight-chip--return">Vuelta</span>
+          <span class="flight-date">Mi&eacute;rcoles 7 octubre 2026</span>
+        </div>
+        <div class="flight-airline"><span class="flight-airline-dot"></span>Iberia</div>
+
+        <div class="flight-route">
+          <div class="flight-point">
+            <div class="flight-code">JFK</div>
+            <div class="flight-time">20:40</div>
+            <div class="flight-city">Terminal 8</div>
+          </div>
+          <div class="flight-line">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="flight-point">
+            <div class="flight-code">MAD</div>
+            <div class="flight-time">10:15<sup>+1</sup></div>
+            <div class="flight-city">Madrid T4S</div>
+          </div>
+        </div>
+
+        <ul class="flight-specs">
+          <li><strong>Vuelo</strong><span>IB0326 &middot; Iberia</span></li>
+          <li><strong>Duraci&oacute;n</strong><span>7h 35min &middot; Directo</span></li>
+          <li><strong>Localizador</strong><span><code>K01BD</code></span></li>
+          <li><strong>Clase</strong><span>Turista &middot; No reembolsable</span></li>
+          <li><strong>Maleta a&ntilde;adida</strong><span>1 maleta &times; persona &middot; m&aacute;x 23 kg</span></li>
+          <li><strong>Llegada</strong><span>Jueves 8 octubre, 10:15 hora local</span></li>
+          <li><strong>Billete Beatriz</strong><span>075-2113035396 + Extra 075-4021804863</span></li>
+          <li><strong>Billete Jose Ricardo</strong><span>075-2113035397 + Extra 075-4021804862</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="flight-summary reveal">
+      <strong>Viajes El Corte Ingl&eacute;s &middot; Expediente 0009826010898.</strong><br>
+      Titulares: Beatriz Escur&iacute;n Rodeiro y Jose Ricardo Chao Blanco. Tarjetas de embarque disponibles 24h antes en <a href="https://iberia.com" target="_blank" rel="noopener">iberia.com</a> con el localizador K01BD y el apellido Escur&iacute;n Rodeiro.
+    </div>
+  </section>
+
+  <!-- ==========================================
+       VUELOS DOMESTICOS
+       ========================================== -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-kicker reveal">Transporte interno</span>
+      <h2 class="section-title reveal">Vuelos dom&eacute;sticos con JetBlue</h2>
+      <p class="section-lead reveal">Dos vuelos JetBlue entre Nueva York y Orlando. Localizador <strong>GNVEMX</strong>. Reservados v&iacute;a Rumbo.es (lastminute.com) y reacomodados tras el cambio de horario del 6 de abril.</p>
+    </div>
+
+    <div class="flights-grid">
+
+      <div class="flight-card reveal">
+        <div class="flight-head">
+          <span class="flight-chip">Ida &middot; JetBlue</span>
+          <span class="flight-date">Lunes 28 septiembre 2026</span>
+        </div>
+        <div class="flight-airline"><span class="flight-airline-dot"></span>JetBlue Airways</div>
+
+        <div class="flight-route">
+          <div class="flight-point">
+            <div class="flight-code">JFK</div>
+            <div class="flight-time">20:45</div>
+            <div class="flight-city">Terminal 5</div>
+          </div>
+          <div class="flight-line">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="flight-point">
+            <div class="flight-code">MCO</div>
+            <div class="flight-time">23:51</div>
+            <div class="flight-city">Orlando</div>
+          </div>
+        </div>
+
+        <ul class="flight-specs">
+          <li><strong>Vuelo</strong><span>JetBlue B60283 &middot; Directo</span></li>
+          <li><strong>Duraci&oacute;n</strong><span>3h 06min</span></li>
+          <li><strong>Localizador</strong><span><code>GNVEMX</code></span></li>
+          <li><strong>Conexi&oacute;n</strong><span>~6,5h de margen tras llegada de Madrid &#10003;</span></li>
+          <li><strong>Traslado JFK</strong><span>T8 &rarr; T5 v&iacute;a AirTrain (~10 min)</span></li>
+        </ul>
+
+        <div class="flight-note">
+          <strong>Reacomodaci&oacute;n confirmada el 06/04.</strong> Tras el cambio de horario que dejaba la conexi&oacute;n imposible, JetBlue reasign&oacute; al B60283 de las 20:45. La conexi&oacute;n desde Madrid es ahora muy c&oacute;moda, pero lleg&aacute;is a Orlando a medianoche y al Sheraton sobre las 00:30. Reservad Uber o taxi por adelantado.
+        </div>
+      </div>
+
+      <div class="flight-card reveal">
+        <div class="flight-head">
+          <span class="flight-chip flight-chip--return">Vuelta &middot; JetBlue</span>
+          <span class="flight-date">Viernes 2 octubre 2026</span>
+        </div>
+        <div class="flight-airline"><span class="flight-airline-dot"></span>JetBlue Airways</div>
+
+        <div class="flight-route">
+          <div class="flight-point">
+            <div class="flight-code">MCO</div>
+            <div class="flight-time">09:30</div>
+            <div class="flight-city">Terminal C</div>
+          </div>
+          <div class="flight-line">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="flight-point">
+            <div class="flight-code">JFK</div>
+            <div class="flight-time">12:05</div>
+            <div class="flight-city">Terminal 5</div>
+          </div>
+        </div>
+
+        <ul class="flight-specs">
+          <li><strong>Vuelo</strong><span>JetBlue B60384 &middot; Directo</span></li>
+          <li><strong>Duraci&oacute;n</strong><span>2h 35min</span></li>
+          <li><strong>Log&iacute;stica</strong><span>Salir del Sheraton ~07:00</span></li>
+          <li><strong>Cambio</strong><span>Vuelo adelantado desde 10:12 a 09:30 (29/03)</span></li>
+        </ul>
+
+        <div class="flight-note">
+          <strong>Madrug&oacute;n obligatorio.</strong> Hay que estar en MCO Terminal C sobre las 07:30, lo que implica salir del Sheraton antes de las 07:00. Preparad las maletas la noche del 1 de octubre. Lleg&aacute;is a Nueva York hacia las 13:30 con toda la tarde libre para instalaros.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flight-summary reveal">
+      <strong>Total pagado (2 pax &middot; ida y vuelta): &euro;446,93.</strong><br>
+      M&eacute;todo: PayPal &middot; Visa terminada en 9285. Reservado v&iacute;a Rumbo.es el 22/03/2026. Billetes: <code>2799557282879</code> (Jose Ricardo) y <code>2799557282880</code> (Beatriz). Reacomodaci&oacute;n confirmada 06/04. FullFlex cancelado el 23/03, reembolso pendiente.
+    </div>
+  </section>
+
+  <!-- ==========================================
+       HOTELES
+       ========================================== -->
+  <section id="hoteles" class="section">
+    <div class="section-head">
+      <span class="section-kicker reveal">Alojamiento</span>
+      <h2 class="section-title reveal">Vuestros dos hogares en EEUU</h2>
+      <p class="section-lead reveal">Un resort en la zona Disney para los d&iacute;as de parques y un hotel de dise&ntilde;o en pleno Times Square para la estancia en Manhattan.</p>
+    </div>
+
+    <div class="hotels-grid">
+
+      <div class="hotel-card reveal">
+        <div class="hotel-image">
+          <img src="https://cache.marriott.com/is/image/marriotts7prod/si-mcobs-2-queens-guestr11256-27875:Classic-Hor?output=webp&interpolation=progressive-bilinear&wid=1200" alt="Sheraton Orlando Lake Buena Vista Resort" loading="lazy">
+          <div class="hotel-badge">Orlando</div>
+          <div class="hotel-fav" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.65-7 10-7 10z"/></svg>
+          </div>
+        </div>
+        <div class="hotel-body">
+          <h3 class="hotel-title">Sheraton Orlando Lake Buena Vista Resort</h3>
+          <p class="hotel-addr">12205 S. Apopka-Vineland Road, Orlando FL 32836 &middot; <a href="tel:+14072390444">+1 407 239 0444</a></p>
+
+          <ul class="hotel-specs">
+            <li><strong>Cadena</strong> Marriott &middot; Sheraton Hotels &amp; Resorts</li>
+            <li><strong>Check-in</strong> Lunes 28 sept (desde 16:00) &middot; <strong>Check-out</strong> Viernes 2 oct (hasta 11:00)</li>
+            <li><strong>Estancia</strong> 4 noches &middot; 2 adultos &middot; cama extragrande</li>
+            <li><strong>Confirmaci&oacute;n</strong> <code>5687.963.492</code> &middot; PIN 7386</li>
+            <li><strong>Titular</strong> Jose Ricardo Chao</li>
+            <li><strong>Pago</strong> En destino, no adelantado</li>
+            <li><strong>Cancelaci&oacute;n</strong> Gratuita hasta 24 sept 23:59 EDT. Desde el 25 sept: US$123,48. Fechas no modificables.</li>
+            <li><strong>Parking</strong> US$25/d&iacute;a en el establecimiento</li>
+          </ul>
+
+          <div class="amenities">
+            <span class="amenity">Transporte Disney</span>
+            <span class="amenity">WiFi gratis</span>
+            <span class="amenity">$10/d&iacute;a comida</span>
+            <span class="amenity">Agua incluida</span>
+            <span class="amenity">Aperitivo</span>
+            <span class="amenity">Actividades resort</span>
+          </div>
+
+          <div class="hotel-price">
+            <div>
+              <div class="hotel-price-amount">&asymp;&euro;501</div>
+              <div class="hotel-price-note">US$589,73 &middot; Pago en destino</div>
+            </div>
+            <div class="hotel-price-note">4 noches</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-card reveal reveal-delay-1">
+        <div class="hotel-image">
+          <img src="https://stories-editor.hilton.com/wp-content/uploads/2023/08/Motto-by-Hilton-New-York-City-Times-Square-Exterior-Photo-Credit-Sarah-Daneke.jpg" alt="Motto By Hilton NYC Times Square" loading="lazy">
+          <div class="hotel-badge">Nueva York</div>
+          <div class="hotel-fav" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.65-7 10-7 10z"/></svg>
+          </div>
+        </div>
+        <div class="hotel-body">
+          <h3 class="hotel-title">Motto By Hilton NYC Times Square</h3>
+          <p class="hotel-addr">152 West 48th Street, Nueva York NY 10036 &middot; <a href="tel:+12126688648">+1 212 668 8648</a></p>
+
+          <ul class="hotel-specs">
+            <li><strong>Cadena</strong> Hilton &middot; Motto Hotels</li>
+            <li><strong>Check-in</strong> Viernes 2 oct (desde 16:00) &middot; <strong>Check-out</strong> Mi&eacute;rcoles 7 oct (hasta 11:00)</li>
+            <li><strong>Estancia</strong> 5 noches &middot; 2 adultos &middot; cama doble grande</li>
+            <li><strong>Confirmaci&oacute;n</strong> <code>5638.033.664</code> &middot; PIN 5789</li>
+            <li><strong>Titular</strong> Beatriz Escur&iacute;n</li>
+            <li><strong>Pago</strong> Ya pagado (anticipado)</li>
+            <li><strong>Cancelaci&oacute;n</strong> Gratuita hasta 28 sept 23:59. Desde el 29 sept: reembolso &euro;1.067,79 (se pierden ~&euro;408).</li>
+            <li><strong>Dep&oacute;sito</strong> USD 750 al check-in &middot; retenci&oacute;n temporal, se devuelve 7 d&iacute;as tras check-out</li>
+            <li><strong>Parking</strong> US$65/d&iacute;a &middot; parking p&uacute;blico cercano</li>
+          </ul>
+
+          <div class="amenities">
+            <span class="amenity">WiFi gratis</span>
+            <span class="amenity">Habitaci&oacute;n adaptada</span>
+            <span class="amenity">Times Square</span>
+            <span class="amenity">Ya pagado</span>
+          </div>
+
+          <div class="hotel-price">
+            <div>
+              <div class="hotel-price-amount">&asymp;&euro;1.475</div>
+              <div class="hotel-price-note">US$1.748 &middot; Ya pagado</div>
+            </div>
+            <div class="hotel-price-note">5 noches</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FULL-BLEED IMAGE BREAK 2
+       ========================================== -->
+  <div class="image-break reveal">
+    <img src="https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=1920&q=85&auto=format&fit=crop" alt="Central Park en oto&ntilde;o" loading="lazy">
+    <div class="image-break-caption">Central Park</div>
+  </div>
+
+  <!-- ==========================================
+       ALERTAS
+       ========================================== -->
+  <section id="alertas" class="section">
+    <div class="section-head">
+      <span class="section-kicker reveal">Importante</span>
+      <h2 class="section-title reveal">Siete cosas que no se pueden olvidar</h2>
+      <p class="section-lead reveal">Puntos cr&iacute;ticos de log&iacute;stica, pagos y cancelaciones. Revisadlos al menos una vez por semana conforme se acerca la salida.</p>
+    </div>
+
+    <div class="alerts-grid">
+
+      <div class="alert alert--ok reveal">
+        <div class="alert-icon" aria-hidden="true">&#9992;&#65039;</div>
+        <div>
+          <div class="alert-title">Vuelos dom&eacute;sticos confirmados</div>
+          <div class="alert-body">B60283 20:45&rarr;23:51 (ida) y B60384 09:30&rarr;12:05 (vuelta). Localizador GNVEMX, 2 pasajeros, &euro;395,42 pagados. Reacomodaci&oacute;n confirmada el 06/04.</div>
+        </div>
+      </div>
+
+      <div class="alert alert--hot reveal">
+        <div class="alert-icon" aria-hidden="true">&#9200;</div>
+        <div>
+          <div class="alert-title">Madrug&oacute;n el 2 de octubre</div>
+          <div class="alert-body">El vuelo MCO&rarr;JFK sale a las 09:30 (cambio de horario 29/03). Hay que estar en MCO Terminal C sobre las 07:30, lo que implica salir del Sheraton antes de las 07:00. Preparad maletas la noche anterior y alarma a las 06:00.</div>
+        </div>
+      </div>
+
+      <div class="alert alert--warn reveal">
+        <div class="alert-icon" aria-hidden="true">&#127769;</div>
+        <div>
+          <div class="alert-title">Llegada nocturna a Orlando</div>
+          <div class="alert-body">Con la reacomodaci&oacute;n, el vuelo JFK&rarr;MCO sale a las 20:45 y llega a las 23:51. Lleg&aacute;is al Sheraton sobre las 00:30 de madrugada. La conexi&oacute;n en JFK es c&oacute;moda (~6,5h de margen), pero reservad Uber/taxi con antelaci&oacute;n.</div>
+        </div>
+      </div>
+
+      <div class="alert alert--warn reveal">
+        <div class="alert-icon" aria-hidden="true">&#128197;</div>
+        <div>
+          <div class="alert-title">Cancelaci&oacute;n Sheraton</div>
+          <div class="alert-body">Gratuita hasta el 24 de septiembre 23:59 EDT. A partir del 25 de septiembre se cobra US$123,48. Las fechas de estancia no se pueden cambiar.</div>
+        </div>
+      </div>
+
+      <div class="alert alert--warn reveal">
+        <div class="alert-icon" aria-hidden="true">&#128197;</div>
+        <div>
+          <div class="alert-title">Cancelaci&oacute;n Motto NYC</div>
+          <div class="alert-body">Gratuita hasta el 28 de septiembre 23:59. Cancelando desde el 29 de septiembre se reembolsan &euro;1.067,79 (se pierden aproximadamente &euro;408). El hotel ya est&aacute; pagado.</div>
+        </div>
+      </div>
+
+      <div class="alert alert--hot reveal">
+        <div class="alert-icon" aria-hidden="true">&#128179;</div>
+        <div>
+          <div class="alert-title">Dep&oacute;sito del Motto</div>
+          <div class="alert-body">Al hacer check-in se retendr&aacute;n USD 750 (&asymp;&euro;632) en la tarjeta de cr&eacute;dito como dep&oacute;sito por da&ntilde;os. Es una retenci&oacute;n temporal que se devuelve 7 d&iacute;as despu&eacute;s del check-out.</div>
+        </div>
+      </div>
+
+      <div class="alert alert--warn reveal">
+        <div class="alert-icon" aria-hidden="true">&#127890;</div>
+        <div>
+          <div class="alert-title">Equipaje en el vuelo de ida</div>
+          <div class="alert-body">La tarifa b&aacute;sica del vuelo Madrid &rarr; JFK no incluye maleta facturada. Solo ten&eacute;is maleta a&ntilde;adida en el regreso JFK &rarr; Madrid (23 kg por persona). Verificad la normativa de equipaje de mano con Iberia/American Airlines.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       REFERENCIAS
+       ========================================== -->
+  <section id="referencias" class="section">
+    <div class="section-head">
+      <span class="section-kicker reveal">Datos cr&iacute;ticos</span>
+      <h2 class="section-title reveal">Referencias y contactos</h2>
+      <p class="section-lead reveal">Localizadores, confirmaciones, tel&eacute;fonos de emergencia. Toda la informaci&oacute;n que podr&iacute;ais necesitar en caso de incidencia durante el viaje.</p>
+    </div>
+
+    <div class="refs-grid">
+
+      <div>
+        <div class="ref-block reveal">
+          <div class="ref-title">Vuelo internacional</div>
+          <ul class="ref-list">
+            <li><strong>Localizador:</strong> <code>K01BD</code></li>
+            <li><strong>Expediente ECI:</strong> 0009826010898</li>
+            <li><strong>Beatriz eTicket:</strong> 075-2113035396</li>
+            <li><strong>Beatriz maleta:</strong> 075-4021804863</li>
+            <li><strong>Jose Ricardo eTicket:</strong> 075-2113035397</li>
+            <li><strong>Jose Ricardo maleta:</strong> 075-4021804862</li>
+          </ul>
+        </div>
+
+        <div class="ref-block reveal">
+          <div class="ref-title">Vuelos dom&eacute;sticos (JetBlue)</div>
+          <ul class="ref-list">
+            <li><strong>Localizador JetBlue:</strong> <code>GNVEMX</code></li>
+            <li><strong>ID Booking Rumbo:</strong> 3162573093</li>
+            <li><strong>Vuelos:</strong> Ida B60283 20:45&rarr;23:51 &middot; Vuelta B60384 09:30&rarr;12:05</li>
+            <li><strong>Billete Jose Ricardo:</strong> 2799557282879</li>
+            <li><strong>Billete Beatriz:</strong> 2799557282880</li>
+            <li><strong>Importe:</strong> &euro;446,93 (vuelos &euro;395,42 + extras &euro;51,51) &middot; Visa &#8226;&#8226;9285</li>
+            <li><strong>ID PayPal:</strong> 3162573093_1_1</li>
+            <li><strong>FullFlex:</strong> Cancelaci&oacute;n solicitada 23/03, pendiente reembolso</li>
+          </ul>
+        </div>
+
+        <div class="ref-block reveal">
+          <div class="ref-title">Sheraton Orlando</div>
+          <ul class="ref-list">
+            <li><strong>Confirmaci&oacute;n:</strong> <code>5687.963.492</code></li>
+            <li><strong>PIN:</strong> 7386</li>
+            <li><strong>Tel&eacute;fono:</strong> +1 407 239 0444</li>
+            <li><strong>GPS:</strong> N 028 23.196 &middot; W 81 30.335</li>
+          </ul>
+        </div>
+
+        <div class="ref-block reveal">
+          <div class="ref-title">Motto NYC</div>
+          <ul class="ref-list">
+            <li><strong>Confirmaci&oacute;n:</strong> <code>5638.033.664</code></li>
+            <li><strong>PIN:</strong> 5789</li>
+            <li><strong>Tel&eacute;fono:</strong> +1 212 668 8648</li>
+            <li><strong>GPS:</strong> N 040 45.572 &middot; W 73 58.990</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="emergency">
+          <div class="ref-title">Contactos de emergencia</div>
+          <ul class="emergency-list">
+            <li>
+              <strong>El Corte Ingl&eacute;s 24h</strong>
+              +34 682 64 76 27 (WhatsApp)<br>+34 913 307 357
+            </li>
+            <li>
+              <strong>Booking.com ES</strong>
+              +34 91 27 68 614
+            </li>
+            <li>
+              <strong>Sheraton Orlando</strong>
+              +1 407 239 0444
+            </li>
+            <li>
+              <strong>Motto by Hilton NYC</strong>
+              +1 212 668 8648
+            </li>
+            <li>
+              <strong>Iberia</strong>
+              iberia.com &middot; loc. K01BD
+            </li>
+            <li>
+              <strong>Rumbo</strong>
+              rumbo.es &middot; ID 3162573093<br>customercare@lastminute.com
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CHECKLIST
+       ========================================== -->
+  <section id="checklist" class="section">
+    <div class="section-head">
+      <span class="section-kicker reveal">Seguimiento</span>
+      <h2 class="section-title reveal">Qu&eacute; falta por cerrar</h2>
+      <p class="section-lead reveal">Los transportes y alojamientos est&aacute;n reservados. Falta planificar parques, actividades, restaurantes y la documentaci&oacute;n final.</p>
+    </div>
+
+    <div class="check-grid">
+
+      <div class="check-card reveal">
+        <div class="check-title">Transportes</div>
+        <ul class="check-list">
+          <li><span class="check-icon check-icon--done">&#10003;</span>Madrid &rarr; JFK (28 sept)</li>
+          <li><span class="check-icon check-icon--done">&#10003;</span>JFK &rarr; Madrid (7 oct)</li>
+          <li><span class="check-icon check-icon--done">&#10003;</span>JFK &rarr; MCO (28 sept)</li>
+          <li><span class="check-icon check-icon--done">&#10003;</span>MCO &rarr; JFK (2 oct)</li>
+        </ul>
+      </div>
+
+      <div class="check-card reveal reveal-delay-1">
+        <div class="check-title">Hoteles</div>
+        <ul class="check-list">
+          <li><span class="check-icon check-icon--done">&#10003;</span>Sheraton Orlando</li>
+          <li><span class="check-icon check-icon--done">&#10003;</span>Motto NYC</li>
+          <li><span class="check-icon check-icon--assess">?</span>Hotel tr&aacute;nsito JFK &mdash; valorar</li>
+        </ul>
+      </div>
+
+      <div class="check-card reveal reveal-delay-2">
+        <div class="check-title">Orlando &middot; Parques</div>
+        <ul class="check-list">
+          <li><span class="check-icon check-icon--pending">!</span>Disney World &mdash; pendiente</li>
+          <li><span class="check-icon check-icon--assess">?</span>Universal Studios &mdash; valorar</li>
+          <li><span class="check-icon check-icon--assess">?</span>Coche de alquiler &mdash; valorar</li>
+          <li><span class="check-icon check-icon--assess">?</span>Restaurantes Disney &mdash; valorar</li>
+        </ul>
+      </div>
+
+      <div class="check-card reveal reveal-delay-3">
+        <div class="check-title">NYC &middot; Cultura</div>
+        <ul class="check-list">
+          <li><span class="check-icon check-icon--pending">!</span>Top of the Rock / Empire State</li>
+          <li><span class="check-icon check-icon--assess">?</span>MoMA / The Met &mdash; valorar</li>
+          <li><span class="check-icon check-icon--assess">?</span>Broadway &mdash; valorar</li>
+          <li><span class="check-icon check-icon--assess">?</span>High Line / Central Park</li>
+        </ul>
+      </div>
+
+      <div class="check-card reveal">
+        <div class="check-title">NYC &middot; Gastronom&iacute;a</div>
+        <ul class="check-list">
+          <li><span class="check-icon check-icon--pending">!</span>Restaurantes con reserva</li>
+          <li><span class="check-icon check-icon--assess">?</span>Chelsea Market</li>
+          <li><span class="check-icon check-icon--assess">?</span>Brunch dominical</li>
+        </ul>
+      </div>
+
+      <div class="check-card reveal reveal-delay-1">
+        <div class="check-title">Documentaci&oacute;n</div>
+        <ul class="check-list">
+          <li><span class="check-icon check-icon--pending">!</span>ESTA &mdash; verificar vigencia</li>
+          <li><span class="check-icon check-icon--pending">!</span>Tarjeta de embarque (24h antes)</li>
+          <li><span class="check-icon check-icon--pending">!</span>Seguro de viaje</li>
+          <li><span class="check-icon check-icon--assess">?</span>Cambio de moneda / tarjeta</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       PRESUPUESTO
+       ========================================== -->
+  <section id="presupuesto" class="section">
+    <div class="section-head">
+      <span class="section-kicker reveal">Finanzas</span>
+      <h2 class="section-title reveal">Presupuesto del viaje</h2>
+      <p class="section-lead reveal">Los transportes y alojamientos suman ~&euro;2.423. Falta sumar entradas, actividades y gastos cotidianos para completar la previsi&oacute;n.</p>
+    </div>
+
+    <div class="budget-hero reveal">
+      <div class="budget-total">
+        <div class="budget-total-label">Total reservado</div>
+        <div class="budget-total-num">&asymp;&euro;2.423</div>
+        <div class="budget-total-note">Hoteles + vuelos internacionales (ECI) + JetBlue dom&eacute;sticos (Rumbo)</div>
+      </div>
+      <div class="budget-bar-wrap">
+        <div class="budget-bar-title">Estado del presupuesto</div>
+        <div class="budget-bar">
+          <div class="budget-bar-fill" id="budgetBar"></div>
+        </div>
+        <div class="budget-bar-labels">
+          <span>Confirmado</span>
+          <span>Por planificar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="budget-table reveal">
+      <div class="budget-row">
+        <span class="budget-item">Vuelos internacionales MAD &#8596; JFK</span>
+        <span class="budget-amount">Incluido paquete ECI</span>
+      </div>
+      <div class="budget-row">
+        <span class="budget-item">Sheraton Orlando &middot; 4 noches (pago en destino)</span>
+        <span class="budget-amount">&asymp;&euro;501 &middot; US$589,73</span>
+      </div>
+      <div class="budget-row">
+        <span class="budget-item">Motto NYC &middot; 5 noches (ya pagado)</span>
+        <span class="budget-amount">&asymp;&euro;1.475 &middot; US$1.748</span>
+      </div>
+      <div class="budget-row">
+        <span class="budget-item">Dep&oacute;sito Motto (reembolsable)</span>
+        <span class="budget-amount budget-amount--refund">&asymp;&euro;632 &middot; USD 750</span>
+      </div>
+      <div class="budget-row">
+        <span class="budget-item">JetBlue JFK &#8596; MCO &middot; 2 pax &middot; i/v</span>
+        <span class="budget-amount">&euro;446,93 &middot; PayPal</span>
+      </div>
+      <div class="budget-row">
+        <span class="budget-item">Disney World</span>
+        <span class="budget-amount budget-amount--pending">Por reservar</span>
+      </div>
+      <div class="budget-row">
+        <span class="budget-item">Actividades Nueva York</span>
+        <span class="budget-amount budget-amount--pending">Por planificar</span>
+      </div>
+      <div class="budget-row">
+        <span class="budget-item">Restaurantes y gastos cotidianos</span>
+        <span class="budget-amount budget-amount--pending">Por planificar</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="footer-title">USA 2026 &middot; Cuaderno de viaje</div>
+    <div class="footer-sub">Actualizado 17 de abril de 2026 &middot; Jose Ricardo Chao &amp; Beatriz Escur&iacute;n</div>
+    <div class="footer-brand">
+      <span class="footer-brand-mark" aria-hidden="true"></span>
+      Dise&ntilde;ado con cari&ntilde;o
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT ‚Äî Scroll reveal + Budget bar + Nav
+       ========================================== -->
+  <script>
+    // Scroll reveal
+    (function() {
+      var els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        els.forEach(function(el) { obs.observe(el); });
+      } else {
+        els.forEach(function(el) { el.classList.add('visible'); });
+      }
+    })();
+
+    // Budget bar
+    (function() {
+      var bar = document.getElementById('budgetBar');
+      if (bar && 'IntersectionObserver' in window) {
+        var o = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) {
+              bar.classList.add('animate');
+              o.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        o.observe(bar);
+      }
+    })();
+
+    // Mobile navigation toggle
+    (function() {
+      var toggle = document.getElementById('navToggle');
+      var links  = document.getElementById('navLinks');
+      if (!toggle || !links) return;
+
+      function setOpen(open) {
+        if (open) {
+          links.classList.add('active');
+          toggle.classList.add('active');
+          toggle.setAttribute('aria-expanded', 'true');
+        } else {
+          links.classList.remove('active');
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        setOpen(!links.classList.contains('active'));
+      });
+
+      links.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() { setOpen(false); });
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
+      });
+
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 900) setOpen(false);
+      });
+    })();
+  </script>
+
+</body>
+</html>
