@@ -900,6 +900,52 @@ a.inl:hover{border-bottom-color:var(--ember)}
   .money-hero{background:#eee!important;color:#000!important}
   .money-list{background:#fff!important;color:#000!important}
 }
+
+/* --------------------------------------------------------
+   HOY - el cuaderno sabe que dia es
+   -------------------------------------------------------- */
+.today{background:var(--ink);color:var(--on-ink);border-top:1px solid var(--rule-ink);border-bottom:1px solid var(--rule-ink)}
+.today-in{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(18px,3vw,36px);padding-block:clamp(34px,5vw,64px)}
+@media (min-width:900px){.today-in{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
+.today-k{display:flex;align-items:center;gap:.8em;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ember-2);font-weight:700}
+.today-k::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--ember-2);box-shadow:0 0 0 0 rgba(232,104,60,.6);animation:tdPulse 2.2s var(--ease) infinite}
+@keyframes tdPulse{0%{box-shadow:0 0 0 0 rgba(232,104,60,.55)}70%{box-shadow:0 0 0 12px rgba(232,104,60,0)}100%{box-shadow:0 0 0 0 rgba(232,104,60,0)}}
+.today h2{font-family:var(--f-display);font-weight:600;font-variation-settings:"WONK" 1;font-size:clamp(1.9rem,4.4vw,3.4rem);line-height:.98;letter-spacing:-.025em;margin:.35em 0 .45em}
+.today-sub{color:var(--on-ink-mut);font-size:clamp(.98rem,1.2vw,1.12rem);line-height:1.55;max-width:52ch;margin:0 0 1.2em}
+.today-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-ink)}
+.today-list li{display:grid;grid-template-columns:5.2em minmax(0,1fr);gap:.9em;padding:.7em 0;border-bottom:1px solid var(--rule-ink);font-size:.95rem;line-height:1.45}
+.today-list li b{font-family:var(--f-mono);font-size:.78rem;font-weight:700;letter-spacing:.06em;color:var(--ember-2);padding-top:.15em}
+.today-list li.warn b{color:var(--gold-ink)}
+.today-list li.warn span{color:var(--gold-ink)}
+.today-next{border:1px solid var(--rule-ink);background:var(--ink-2);padding:clamp(18px,2.4vw,26px)}
+.today-next h3{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--on-ink-mut);margin:0 0 .9em;font-weight:600}
+.today-next .t{font-family:var(--f-display);font-weight:600;font-variation-settings:"WONK" 1;font-size:1.3rem;line-height:1.1;margin:0 0 .5em}
+.today-next p{margin:0;color:var(--on-ink-mut);font-size:.9rem;line-height:1.5}
+.today-cd{display:grid;gap:1px;background:var(--rule-ink);border:1px solid var(--rule-ink)}
+.today-cd li{list-style:none;background:var(--ink-2);display:grid;grid-template-columns:auto minmax(0,1fr);gap:.9em;padding:.75em .9em;font-size:.9rem;line-height:1.4}
+.today-cd li b{font-family:var(--f-mono);font-size:.7rem;font-weight:700;letter-spacing:.06em;color:var(--ember-2);white-space:nowrap;padding-top:.15em;min-width:5.5em}
+.today-cd li.done{opacity:.45}
+.today-cd li.done span{text-decoration:line-through}
+.today-cd li.hot b{color:var(--gold-ink)}
+.today[hidden]{display:none}
+
+/* --------------------------------------------------------
+   DATOS PROPIOS - lo que solo el viajero sabe
+   -------------------------------------------------------- */
+.own{display:grid;gap:1px;background:var(--rule-paper);border:1px solid var(--rule-paper)}
+@media (min-width:760px){.own{grid-template-columns:1fr 1fr}}
+.own-f{background:var(--paper-2);padding:clamp(14px,2vw,18px);display:grid;gap:.4em}
+.own-f label{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--on-paper-mut);font-weight:600}
+.own-f input,.own-f select{
+  font:inherit;font-size:.95rem;padding:.55em .7em;border:1px solid var(--rule-paper);background:var(--paper);
+  color:var(--on-paper);border-radius:2px;width:100%;min-width:0;
+}
+.own-f input:focus,.own-f select:focus{outline:2px solid var(--ember);outline-offset:1px;border-color:var(--ember)}
+.own-f input::placeholder{color:rgba(20,17,15,.35)}
+.own-f small{font-size:.78rem;color:var(--on-paper-mut);line-height:1.4}
+.own-note{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--on-paper-mut);margin:.9em 0 0}
+.tm-own{font-family:var(--f-mono);font-size:.9rem;font-weight:700;letter-spacing:.04em}
+.tm-own.empty{color:var(--gold-ink);font-weight:500;font-size:.8rem}
 </style>
 </head>
 <body>
@@ -971,6 +1017,19 @@ a.inl:hover{border-bottom-color:var(--ember)}
   <div class="scroll-hint">Desplaza</div>
 </header>
 
+<!-- ====================== HOY (se rellena por JS segun la fecha) ====================== -->
+<section class="today" id="hoy" hidden aria-live="polite">
+  <div class="wrap today-in">
+    <div>
+      <span class="today-k" id="hoyK">Hoy</span>
+      <h2 id="hoyT"></h2>
+      <p class="today-sub" id="hoyS"></p>
+      <ul class="today-list" id="hoyL"></ul>
+    </div>
+    <aside class="today-next" id="hoyN"></aside>
+  </div>
+</section>
+
 <!-- ====================== I &#183; ITINERARIO ====================== -->
 <section class="chapter" id="itinerario">
   <div class="wrap">
@@ -988,7 +1047,7 @@ a.inl:hover{border-bottom-color:var(--ember)}
         <div class="day-body">
           <h3>Madrid &rarr; Nueva York &rarr; Orlando</h3>
           <p><strong>IB4001</strong> sale de MAD T4S a las 10:25 y aterriza en JFK T8 a las 12:25. Tras inmigraci&oacute;n, enlace en AirTrain al T5 y embarque en <strong>JetBlue B60283</strong> a las 20:45 rumbo a Orlando (MCO 23:51). Llegada al Sheraton hacia las 00:30 de madrugada.</p>
-          <span class="pill pill--ember">D&iacute;a de tr&aacute;nsito</span><span class="pill">6,5 h de escala en JFK</span><span class="pill pill--stamp">Hotel avisado de la llegada tard&iacute;a</span>
+          <span class="pill pill--ember">D&iacute;a de tr&aacute;nsito</span><span class="pill">6,5 h de escala en JFK</span><span class="pill pill--stamp">Llegada de madrugada confirmada por el hotel</span>
         </div>
         <div class="day-media rv-img"><img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?w=1000&amp;q=80&amp;auto=format&amp;fit=crop" width="1000" alt="Avi&oacute;n aterrizando al atardecer" loading="lazy"></div>
       </article>
@@ -997,7 +1056,7 @@ a.inl:hover{border-bottom-color:var(--ember)}
         <div class="day-idx"><b>02</b>Mar 29 sept</div>
         <div class="day-body">
           <h3>Hollywood Studios de la ma&ntilde;ana a <em>Fantasmic!</em></h3>
-          <p>Empieza tarde a prop&oacute;sito, porque anoche lleg&aacute;is a las 00:30. Shuttle del hotel a las <strong>09:55</strong> o, si prefer&iacute;s dormir, el de las 11:40. El parque abre a las 9:00 y cierra a las 21:00: es el &uacute;nico de los tres con noche larga, y termina con <em>Fantasmic!</em> hacia las 20:30. Vuelta en Uber, unos 11 $.</p>
+          <p>Empieza tarde a prop&oacute;sito, porque anoche lleg&aacute;is a las 00:30. Shuttle del hotel a las <strong>09:55</strong> o, si prefer&iacute;s dormir, el de las 11:40. El parque abre a las 9:00 y cierra a las 21:00: es el &uacute;nico de los tres con noche larga, y termina con <em>Fantasmic!</em> a las 20:00. Vuelta en Uber, unos 11 $.</p>
           <span class="pill pill--stamp">Shuttle del hotel</span><span class="pill">Cierra a las 21:00</span>
         </div>
         <div class="day-media rv-img"><img src="https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?w=1000&amp;q=80&amp;auto=format&amp;fit=crop" width="1000" alt="Piscina entre palmeras en un resort de Florida" loading="lazy"></div>
@@ -1007,7 +1066,7 @@ a.inl:hover{border-bottom-color:var(--ember)}
         <div class="day-idx"><b>03</b>Mi&eacute; 30 sept</div>
         <div class="day-body">
           <h3>Magic Kingdom, el d&iacute;a grande</h3>
-          <p>El <strong>&uacute;nico d&iacute;a de los tres sin fiesta de Halloween</strong>, as&iacute; que el parque abre hasta el final y hay fuegos sobre el castillo. No hay shuttle del hotel a este parque: se va y se vuelve en Uber, unos 14 $ por trayecto.</p>
+          <p>El <strong>&uacute;nico d&iacute;a de los tres sin fiesta de Halloween</strong>, as&iacute; que el parque abre hasta las 22:00 y hay fuegos sobre el castillo a las 21:30. No hay shuttle del hotel a este parque: se va y se vuelve en Uber, unos 14 $ por trayecto.</p>
           <span class="pill pill--ember">Fecha bloqueada</span><span class="pill pill--gold">Uber ida y vuelta</span>
         </div>
         <div class="day-media rv-img"><img src="https://images.unsplash.com/photo-1597466599360-3b9775841aec?w=1000&amp;q=80&amp;auto=format&amp;fit=crop" width="1000" alt="Castillo de Disney World" loading="lazy"></div>
@@ -1355,15 +1414,15 @@ a.inl:hover{border-bottom-color:var(--ember)}
         <span class="card-n">NIVEL 1 &middot; EL QUE INTERESA</span>
         <h4>Multi Pass</h4>
         <p>Un pago por persona y d&iacute;a que cubre una pasada por muchas atracciones. Se reservan franjas en la app <em>My Disney Experience</em>: hasta tres a la vez, y al usar una se libera otra.</p>
-        <span class="card-price">17&ndash;35 $/d&iacute;a seg&uacute;n parque</span>
-        <p style="margin-top:.7em">Magic Kingdom ~33 $ &middot; Hollywood Studios ~30 $ &middot; Animal Kingdom ~18 $, el m&aacute;s barato de todo el complejo</p>
+        <span class="card-price">Precios ya publicados para vuestros d&iacute;as</span>
+        <p style="margin-top:.7em">Hollywood Studios el 29: <strong>22 $</strong> &middot; Magic Kingdom el 30: <strong>27 $</strong> &middot; Animal Kingdom el 1: <strong>15 $</strong>. Disney baj&oacute; las tarifas el 1 de septiembre.</p>
       </div>
       <div class="card">
         <span class="card-n">NIVEL 2 &middot; A LA CARTA</span>
         <h4>Single Pass</h4>
         <p>Por atracci&oacute;n suelta, para los cabezas de cartel que el Multi Pass no cubre. M&aacute;ximo dos por persona y d&iacute;a.</p>
-        <span class="card-price">Rise of the Resistance 20&ndash;24 $</span>
-        <p style="margin-top:.7em">TRON ~20 $ &middot; Flight of Passage 12&ndash;19 $ &middot; Seven Dwarfs ~13 $</p>
+        <span class="card-price">Rise of the Resistance 22 $</span>
+        <p style="margin-top:.7em">TRON 19 $ &middot; Flight of Passage 15 $ &middot; Seven Dwarfs 11 $. Precios publicados el 12 de septiembre, por persona m&aacute;s impuesto.</p>
       </div>
       <div class="card">
         <span class="card-n">NIVEL 3 &middot; DESCARTADO</span>
@@ -1377,15 +1436,15 @@ a.inl:hover{border-bottom-color:var(--ember)}
       <div class="alert alert--ok rv">
         <span class="alert-i">Plan</span>
         <div>
-          <h4>La compra recomendada: unos 240 $ los dos</h4>
-          <p>Multi Pass los tres d&iacute;as &mdash;30 $ en Hollywood Studios, 33 $ en Magic Kingdom y 18 $ en Animal Kingdom, unos 81 $ por persona&mdash; m&aacute;s dos Single Pass: <em>Rise of the Resistance</em> y <em>Flight of Passage</em>, otros 38 $ por persona. En Animal Kingdom el Multi Pass es discutible con solo cinco atracciones, pero a 18 $ cubre Everest, el safari y Na&apos;vi y sale a cuenta.</p>
+          <h4>La compra recomendada: unos 200 $ los dos</h4>
+          <p>Multi Pass los tres d&iacute;as &mdash;22 $ en Hollywood Studios, 27 $ en Magic Kingdom y 15 $ en Animal Kingdom, 64 $ por persona&mdash; m&aacute;s dos Single Pass: <em>Rise of the Resistance</em> y <em>Flight of Passage</em>, otros 37 $ por persona. En Animal Kingdom el Multi Pass es discutible con solo cinco atracciones, pero a 18 $ cubre Everest, el safari y Na&apos;vi y sale a cuenta.</p>
         </div>
       </div>
       <div class="alert alert--hot rv rv-1">
         <span class="alert-i">Alarma</span>
         <div>
           <h4>Vuestra ventana es de 3 d&iacute;as, no de 7</h4>
-          <p>Los hu&eacute;spedes de hoteles Disney reservan con siete d&iacute;as. <strong>El Sheraton Lake Buena Vista no est&aacute; en esa lista</strong>, as&iacute; que entr&aacute;is en la ventana de tres d&iacute;as, a las <strong>7:00 de Florida &mdash; las 13:00 en Espa&ntilde;a</strong>. Poned alarma: las buenas vuelan en minutos. Por lo mismo, tampoco ten&eacute;is Early Entry: llegad a la hora oficial de apertura, no antes.</p>
+          <p>Los hu&eacute;spedes de hoteles Disney reservan con siete d&iacute;as. <strong>El Sheraton no est&aacute; en esa lista</strong>, as&iacute; que entr&aacute;is en la ventana de tres d&iacute;as, a las <strong>7:00 de Florida, las 13:00 en Espa&ntilde;a</strong>: el s&aacute;bado 26 para Hollywood Studios y el domingo 27 para Magic Kingdom. La del jueves 1 se abre el lunes 28 a las 13:00, <strong>cuando vais volando sobre el Atl&aacute;ntico</strong>: comprad Animal Kingdom nada m&aacute;s aterrizar en JFK; su Flight of Passage rara vez se agota. Tampoco ten&eacute;is Early Entry: llegad a la hora oficial de apertura.</p>
         </div>
       </div>
     </div>
@@ -1396,7 +1455,7 @@ a.inl:hover{border-bottom-color:var(--ember)}
         <span class="card-n">MARTES 29 &middot; 9:00&ndash;21:00</span>
         <h4>Hollywood Studios</h4>
         <p>Va el primero justamente porque es el que m&aacute;s tarde cierra. Lleg&aacute;is al hotel a las 00:30 de esa madrugada, as&iacute; que empezar a media ma&ntilde;ana no cuesta nada: aun saliendo a las 09:55 quedan once horas de parque.</p>
-        <p><b>Imprescindibles:</b> Star Wars Rise of the Resistance con Single Pass &middot; <em>Rock &apos;n&apos; Roller Coaster Starring The Muppets</em>, reinaugurada el 26 de mayo &middot; Tower of Terror &middot; Slinky Dog Dash &middot; Millennium Falcon Smugglers Run &middot; Runaway Railway &middot; <em>Fantasmic!</em> hacia las 20:30.</p>
+        <p><b>Imprescindibles:</b> Star Wars Rise of the Resistance con Single Pass &middot; <em>Rock &apos;n&apos; Roller Coaster Starring The Muppets</em>, reinaugurada el 26 de mayo &middot; Tower of Terror &middot; Slinky Dog Dash &middot; Millennium Falcon Smugglers Run &middot; Runaway Railway &middot; <em>Fantasmic!</em> a las <strong>20:00</strong> (segundo pase 21:30). Novedad de septiembre: <em>The Magic of Disney Animation</em>, abierta solo de 10:00 a 18:00.</p>
         <p><b>Truco:</b> la fila de <em>single rider</em> de Rock &apos;n&apos; Roller Coaster y de Smugglers Run os ahorra una hora larga y, viajando dos, la separaci&oacute;n dura lo que dura la cola.</p>
         <p><b>Comer:</b> Sci-Fi Dine-In, con las mesas dentro de coches antiguos (19-30 $), o el <em>lounge</em> exterior del Hollywood Brown Derby sin reserva (13-20 $). Copa en Oga&apos;s Cantina, 15-22,50 $.</p>
         <span class="pill pill--stamp">Shuttle 09:55 o 11:40</span><span class="pill pill--gold">Vuelta en Uber ~11 $</span>
@@ -1405,8 +1464,8 @@ a.inl:hover{border-bottom-color:var(--ember)}
       <div class="card">
         <span class="card-n">MI&Eacute;RCOLES 30 &middot; 9:00&ndash;22:00</span>
         <h4>Magic Kingdom</h4>
-        <p>Fecha bloqueada por el calendario de Halloween: es el <strong>&uacute;nico de los tres d&iacute;as sin fiesta</strong>, y por tanto el &uacute;nico en que el parque abre hasta el final y hay fuegos sobre el castillo hacia las 21:00.</p>
-        <p><b>Imprescindibles:</b> TRON Lightcycle/Run &middot; Pirates of the Caribbean &middot; Haunted Mansion &middot; Big Thunder Mountain &middot; Space Mountain &middot; Seven Dwarfs Mine Train &middot; <em>Happily Ever After</em>.</p>
+        <p>Fecha bloqueada por el calendario de Halloween: es el <strong>&uacute;nico de los tres d&iacute;as sin fiesta</strong>, y por tanto el &uacute;nico en que el parque abre hasta las 22:00 y hay fuegos sobre el castillo: <em>Happily Ever After</em> a las <strong>21:30</strong>.</p>
+        <p><b>Imprescindibles:</b> TRON Lightcycle/Run &middot; Pirates of the Caribbean &middot; Haunted Mansion &middot; Big Thunder Mountain &middot; Space Mountain &middot; Seven Dwarfs Mine Train &middot; <em>Happily Ever After</em>. <b>Cerrados por obras:</b> el tren del parque y Carousel of Progress.</p>
         <p><b>Comer:</b> Skipper Canteen, servicio de mesa con aire acondicionado y casi siempre con hueco, 20-35 $. Y reservad <em>The Beak and Barrel</em>, la taberna pirata de Adventureland: sesiones de 45 minutos que se agotan con semanas.</p>
         <p><b>Ojo:</b> el shuttle del hotel no llega aqu&iacute;, y a la salida de los fuegos el Uber se dispara. Contad 15 $ a la ida y entre 30 y 45 $ a la vuelta.</p>
         <span class="pill pill--ember">Fecha bloqueada</span><span class="pill pill--gold">Uber ida y vuelta</span>
@@ -1461,8 +1520,8 @@ a.inl:hover{border-bottom-color:var(--ember)}
         <div class="alert alert--hot mt-m">
           <span class="alert-i">Ya</span>
           <div>
-            <h4>Las reservas se abren 60 d&iacute;as antes, y son d&iacute;a a d&iacute;a</h4>
-            <p>A las 6:00 de Florida, <strong>las 12:00 en Espa&ntilde;a</strong>. Como no dorm&iacute;s en un hotel Disney, no pod&eacute;is reservar los tres d&iacute;as de golpe: el martes 29 se abre el <strong>viernes 31 de julio</strong>, el mi&eacute;rcoles 30 el <strong>s&aacute;bado 1 de agosto</strong> y el jueves 1 el <strong>domingo 2 de agosto</strong>. Oga&apos;s Cantina y The Beak and Barrel vuelan en minutos; Tiffins y Nomad Lounge aguantan d&iacute;as.</p>
+            <h4>Si no reservasteis en agosto, a&uacute;n hay dos v&iacute;as</h4>
+            <p>La ventana de 60 d&iacute;as ya pas&oacute;, pero Disney libera cancelaciones cada ma&ntilde;ana: revisad <em>My Disney Experience</em> a las 12:00 hora espa&ntilde;ola y a &uacute;ltima hora de la tarde. Y el mismo d&iacute;a, la lista <em>walk-up</em> de la app suele dar hueco en la &uacute;ltima hora de servicio. Oga&apos;s Cantina es lo m&aacute;s dif&iacute;cil; Tiffins y Nomad Lounge, lo m&aacute;s f&aacute;cil.</p>
           </div>
         </div>
         <p class="lead" style="font-size:.86rem;margin-top:1em"><strong>&iquest;Y Universal?</strong> Epic Universe es el parque m&aacute;s ambicioso construido en Orlando en d&eacute;cadas y el Sheraton tiene autob&uacute;s directo a las 7:05 y 11:05, pero necesita al menos un d&iacute;a entero con Express Pass. Con tres jornadas y tres parques Disney ya elegidos, no desvi&eacute;is.</p>
@@ -1504,7 +1563,7 @@ a.inl:hover{border-bottom-color:var(--ember)}
         <p style="margin-top:1em"><strong>Comer:</strong> Los Tacos No. 1, 229 W 43rd St. De pie, en barra, tacos de adobada a 5-7 $. Unos 25 $ para dos.</p>
         <div class="alert alert--hot" style="margin-top:1em">
           <span class="alert-i">Reserva</span>
-          <div><h4>La franja del atardecer se agota siempre</h4><p>El sol se pone hacia las 18:35. Entrad 45 minutos antes para ver el d&iacute;a y la noche desde arriba, y comprad con cuatro a ocho semanas de antelaci&oacute;n.</p></div>
+          <div><h4>La franja del atardecer se agota siempre</h4><p>El sol se pone a las <strong>18:36</strong> ese viernes y el crep&#250;sculo dura hasta las 19:03. Entrad hacia las 17:50 para ver el d&iacute;a y la noche desde arriba, y comprad con cuatro a ocho semanas de antelaci&oacute;n.</p></div>
         </div>
       </article>
 
@@ -1512,7 +1571,7 @@ a.inl:hover{border-bottom-color:var(--ember)}
         <span class="card-n">S&Aacute;BADO 3</span>
         <h4>El r&iacute;o, el hierro y el mercado</h4>
         <ol class="stops">
-          <li><b>Little Island</b><span>Un parque flotante sobre tulipas de hormig&oacute;n, a la altura de la calle 13.</span><span class="meta">Gratis &middot; 45 min &middot; l&iacute;nea A/C/E a 14 St</span></li>
+          <li><b>Little Island</b><span>Un parque flotante sobre tulipas de hormig&oacute;n, a la altura de la calle 13.</span><span class="meta">Gratis &middot; 45 min &middot; l&iacute;nea A o C a 14 St (la E no para ese finde)</span></li>
           <li><b>The High Line</b><span>V&iacute;a de tren elevada convertida en jard&iacute;n salvaje; se camina de sur a norte con Manhattan a la altura del segundo piso.</span><span class="meta">Gratis &middot; 1 h 15</span></li>
           <li><b>Chelsea Market</b><span>Antigua f&aacute;brica de galletas Nabisco, ahora un pasillo de ladrillo con las mejores paradas de comida de la ciudad.</span><span class="meta">Gratis &middot; 1 h &middot; salida en la calle 16</span></li>
           <li><b>Edge, Hudson Yards</b><span>Terraza triangular en voladizo con suelo de cristal.</span><span class="meta">36-45 $ &middot; 1 h &middot; extremo norte de la High Line</span></li>
@@ -1633,6 +1692,14 @@ a.inl:hover{border-bottom-color:var(--ember)}
           <span class="alert-i">Vuelta</span>
           <div><h4>7 de octubre: AirTrain + LIRR</h4><p>Saliendo del hotel a las 16:00 estar&eacute;is en la T8 a las 17:20, tres horas antes del embarque. A esa hora la carretera hacia Queens es una loter&iacute;a y el tren no lo es.</p></div>
         </div>
+      </div>
+    </div>
+
+    <div class="alert alert--hot rv mt-l">
+      <span class="alert-i">Obras</span>
+      <div>
+        <h4>El fin de semana que lleg&aacute;is, la l&iacute;nea E no para en vuestra zona</h4>
+        <p>Del viernes 2 a las 21:45 al lunes 5 a las 05:00, la <strong>E hacia el sur se salta 7 Av, 50 St, 42 St-Port Authority, 34 St-Penn, 23 St y 14 St</strong>, y tampoco para en Spring St, Canal ni World Trade Center. Para el s&aacute;bado de la High Line usad la <strong>A o la C</strong> desde 42 St hasta 14 St. La L tampoco circula por Manhattan ese fin de semana; no os afecta. El martes 6 la E ya funciona con normalidad para bajar al 11-S.</p>
       </div>
     </div>
 
@@ -2062,7 +2129,7 @@ a.inl:hover{border-bottom-color:var(--ember)}
     <div class="tips rv">
       <div class="tip"><p><strong>No es &laquo;un parque&raquo; como Disneyland Paris.</strong> Son cuatro parques con identidades distintas y hay que priorizar, no verlo todo. La improvisaci&oacute;n es el enemigo principal del disfrute.</p><a class="tip-src" href="https://www.parquetematico.net/orlando/waltdisneyworld/" target="_blank" rel="noopener"><span>ParqueTem&aacute;tico.net</span><span class="arw" aria-hidden="true">&#8599;</span></a></div>
       <div class="tip"><p><strong>Septiembre es la mejor &eacute;poca.</strong> &laquo;De las cinco veces que he visitado, las dos que lo hice en septiembre la han convertido en mi &eacute;poca favorita: suele ser la de menos afluencia&raquo;. Vuestras fechas juegan a favor.</p><a class="tip-src" href="https://www.parquetematico.net/orlando" target="_blank" rel="noopener"><span>ParqueTem&aacute;tico.net</span><span class="arw" aria-hidden="true">&#8599;</span></a></div>
-      <div class="tip"><p><strong>No reserv&eacute;is el Lightning Lane por orden cronol&oacute;gico, sino por dificultad:</strong> primero Magic Kingdom, luego Hollywood Studios, despu&eacute;s EPCOT. Concentrad las tres reservas entre las 10:00 y las 13:00, nunca por la tarde.</p><a class="tip-src" href="https://www.parquetematico.net/orlando/waltdisneyworld/lightninglane/" target="_blank" rel="noopener"><span>ParqueTem&aacute;tico &middot; gu&iacute;a de Lightning Lane</span><span class="arw" aria-hidden="true">&#8599;</span></a></div>
+      <div class="tip"><p><strong>No reserv&eacute;is el Lightning Lane por orden cronol&oacute;gico, sino por dificultad:</strong> primero Magic Kingdom, luego Hollywood Studios, despu&eacute;s Animal Kingdom. Concentrad las tres reservas entre las 10:00 y las 13:00, nunca por la tarde.</p><a class="tip-src" href="https://www.parquetematico.net/orlando/waltdisneyworld/lightninglane/" target="_blank" rel="noopener"><span>ParqueTem&aacute;tico &middot; gu&iacute;a de Lightning Lane</span><span class="arw" aria-hidden="true">&#8599;</span></a></div>
       <div class="tip"><p><strong>El truco clave:</strong> al escanear el m&oacute;vil en la entrada de la cola ya cuenta como usada, as&iacute; que mientras esper&aacute;is a montar ya pod&eacute;is reservar la siguiente.</p><a class="tip-src" href="https://www.parquetematico.net/orlando/waltdisneyworld/lightninglane/" target="_blank" rel="noopener"><span>ParqueTem&aacute;tico.net</span><span class="arw" aria-hidden="true">&#8599;</span></a></div>
       <div class="tip"><p><strong>Usad Mobile Order siempre que pod&aacute;is:</strong> os ahorra muchas colas. Presupuesto real comiendo en <em>quick service</em>: 50-70 &euro; al d&iacute;a por persona. Se puede entrar comida propia &mdash;prohibido el vidrio&mdash; y en todos los restaurantes dan vasos de agua gratis.</p><a class="tip-src" href="https://queverenorlando.com/2024/04/05/que-llevar-a-disney/" target="_blank" rel="noopener"><span>Qu&eacute; Ver en Orlando</span><span class="arw" aria-hidden="true">&#8599;</span></a></div>
       <div class="tip"><p><strong>Estructurad el d&iacute;a alrededor del clima:</strong> ma&ntilde;ana intensa, de 12:00 a 16:00 refugio en atracciones interiores, y tarde otra vez fuera. El poncho ligero en la mochila es casi obligatorio.</p><a class="tip-src" href="https://queverenorlando.com/2026/05/22/verano-en-orlando/" target="_blank" rel="noopener"><span>Qu&eacute; Ver en Orlando &middot; periodista espa&ntilde;ola en Orlando</span><span class="arw" aria-hidden="true">&#8599;</span></a></div>
@@ -2101,11 +2168,11 @@ a.inl:hover{border-bottom-color:var(--ember)}
       </div>
       <div class="alert alert--ok rv">
         <span class="alert-i">Hecho</span>
-        <div><h4>Llegada tard&iacute;a avisada al Sheraton</h4><p>Mensaje enviado por la app de Booking el 2 de septiembre: el vuelo aterriza en MCO a las 23:51 y el check-in ser&aacute; entre las 00:30 y la 01:15 de la madrugada del 29. Se ha pedido expresamente que <strong>no se marque como <em>no-show</em></strong>, porque la habitaci&oacute;n est&aacute; reservada desde la noche del 28. <strong>Falta la respuesta del hotel:</strong> si no contestan en una semana, llamad al +1 407 239 0444 y guardad la confirmaci&oacute;n por escrito.</p></div>
+        <div><h4>Llegada tard&iacute;a confirmada por el Sheraton</h4><p>Mensaje enviado por la app de Booking el 2 de septiembre: el vuelo aterriza en MCO a las 23:51 y el check-in ser&aacute; entre las 00:30 y la 01:15 de la madrugada del 29. <strong>El hotel ha contestado por escrito:</strong> han a&ntilde;adido una nota a la reserva y recepci&oacute;n la dejar&aacute; <em>pre-registrada</em>, de modo que la habitaci&oacute;n queda asegurada aunque llegu&eacute;is de madrugada. La respuesta est&aacute; guardada en la carpeta del hotel; llevadla en el m&oacute;vil por si en recepci&oacute;n no la ven a la primera.</p></div>
       </div>
       <div class="alert alert--hot rv">
-        <span class="alert-i">Ago</span>
-        <div><h4>Reservas de Disney: tres citas, 31 de julio, 1 y 2 de agosto</h4><p>La ventana se abre 60 d&iacute;as antes de cada d&iacute;a, a las 6:00 de Florida &mdash; <strong>las 12:00 en Espa&ntilde;a</strong>. Y como no dorm&iacute;s en un hotel Disney, hay que reservar d&iacute;a a d&iacute;a: el 31 de julio para el martes 29, el 1 de agosto para el mi&eacute;rcoles 30 y el 2 de agosto para el jueves 1. Oga&apos;s Cantina y The Beak and Barrel se agotan en minutos.</p></div>
+        <span class="alert-i">Ya</span>
+        <div><h4>Restaurantes de Disney: la ventana pas&oacute; en agosto</h4><p>Si no reservasteis Oga&apos;s Cantina, Sci-Fi Dine-In o The Beak and Barrel entre el 31 de julio y el 2 de agosto, a&uacute;n hay dos v&iacute;as: mirar cancelaciones en <em>My Disney Experience</em> cada ma&ntilde;ana (se liberan huecos a diario) y la lista <em>walk-up</em> de la app el mismo d&iacute;a, con m&aacute;s suerte en la &uacute;ltima hora. Tiffins y Nomad Lounge, en Animal Kingdom, suelen tener hueco sin problema. <strong>Anotad abajo lo que teng&aacute;is reservado</strong>, en el panel de datos.</p></div>
       </div>
       <div class="alert alert--hot rv rv-1">
         <span class="alert-i">Sept</span>
@@ -2117,7 +2184,7 @@ a.inl:hover{border-bottom-color:var(--ember)}
       </div>
       <div class="alert rv rv-1">
         <span class="alert-i">28 sep</span>
-        <div><h4>Cancelaci&oacute;n gratuita del Motto</h4><p>Hasta el 28 de septiembre a las 23:59. Cancelando desde el 29 se reembolsan 1.067,79 &euro; y se pierden unos 408 &euro;. El hotel ya est&aacute; pagado.</p></div>
+        <div><h4>Cancelaci&oacute;n gratuita del Motto</h4><p>Hasta el 28 de septiembre a las 23:59. Cancelando desde el 29 se reembolsan 1.067,79 &euro; y se pierden unos 408 &euro;. Queda por confirmar en Booking si la estancia est&aacute; prepagada o se abona al llegar.</p></div>
       </div>
       <div class="alert alert--hot rv">
         <span class="alert-i">2 oct</span>
@@ -2131,7 +2198,7 @@ a.inl:hover{border-bottom-color:var(--ember)}
 
     <div class="pull rv">
       <span class="pull-fig" id="pullFig">62 d&iacute;as</span>
-      <p class="pull-txt" id="pullDays">para el despegue. Las dos fechas que de verdad aprietan son el 2 de agosto, cuando se abren las reservas de restaurante de Disney, y la primera semana de septiembre, para la N26 Go.</p>
+      <p class="pull-txt" id="pullDays">para el despegue. Lo que aprieta ahora: la ventana del Lightning Lane se abre el 26, 27 y 28 de septiembre a las 13:00, y la del jueves 1 os pilla en pleno vuelo sobre el Atl&aacute;ntico.</p>
     </div>
 
     <h3 class="display d-l rv mt-l" style="margin-bottom:.6em">Localizadores y contactos</h3>
@@ -2241,17 +2308,17 @@ a.inl:hover{border-bottom-color:var(--ember)}
         <label class="ck-item"><input type="checkbox" data-ck="embarque"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Tarjetas de embarque (24 h antes)</span></label>
         <label class="ck-item"><input type="checkbox" data-ck="copias"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Copias de ESTA y reservas en el m&oacute;vil</span></label>
         <label class="ck-item"><input type="checkbox" data-ck="lateaviso" checked><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Avisar al Sheraton de la llegada de madrugada</span></label>
-        <label class="ck-item"><input type="checkbox" data-ck="laterespuesta"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Guardar la respuesta escrita del Sheraton</span></label>
+        <label class="ck-item"><input type="checkbox" data-ck="laterespuesta" checked><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Respuesta escrita del Sheraton recibida: reserva pre-registrada</span></label>
       </div>
 
       <div class="ck-group rv rv-1">
         <h4>Disney &middot; antes de agosto</h4>
         <label class="ck-item"><input type="checkbox" data-ck="entradas"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Pack de 3 d&iacute;as: Hollywood Studios, Magic Kingdom y Animal Kingdom</span></label>
         <label class="ck-item"><input type="checkbox" data-ck="mde"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Instalar My Disney Experience y vincular entradas</span></label>
-        <label class="ck-item"><input type="checkbox" data-ck="cena29"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">31 jul, 12:00 &mdash; reservar Oga&apos;s y Sci-Fi (mar 29)</span></label>
-        <label class="ck-item"><input type="checkbox" data-ck="cena30"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">1 ago, 12:00 &mdash; reservar Beak and Barrel (mi&eacute; 30)</span></label>
-        <label class="ck-item"><input type="checkbox" data-ck="cena1"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">2 ago, 12:00 &mdash; reservar Tiffins o Nomad (jue 1)</span></label>
-        <label class="ck-item"><input type="checkbox" data-ck="ll"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Alarma Lightning Lane: 26, 27 y 28 sept a las 13:00</span></label>
+        <label class="ck-item"><input type="checkbox" data-ck="cena29"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Reserva de Oga&apos;s Cantina o Sci-Fi para el martes 29 (o buscar cancelaciones)</span></label>
+        <label class="ck-item"><input type="checkbox" data-ck="cena30"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Reserva de The Beak and Barrel para el mi&eacute;rcoles 30 (o buscar cancelaciones)</span></label>
+        <label class="ck-item"><input type="checkbox" data-ck="cena1"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Tiffins o Nomad Lounge para el jueves 1</span></label>
+        <label class="ck-item"><input type="checkbox" data-ck="ll"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Alarma Lightning Lane: 26 sept (HS) y 27 sept (MK) a las 13:00; el de Animal Kingdom al aterrizar en JFK</span></label>
         <label class="ck-item"><input type="checkbox" data-ck="uberapp"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Uber configurado: 4 de los 6 trayectos a parques van en coche</span></label>
       </div>
 
@@ -2288,6 +2355,21 @@ a.inl:hover{border-bottom-color:var(--ember)}
         <label class="ck-item"><input type="checkbox" data-ck="brooklyn"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">&iquest;Una ma&ntilde;ana en Brooklyn o tour de contrastes?</span></label>
       </div>
     </div>
+
+    <h3 class="display d-l rv mt-l" style="margin-bottom:.4em">Lo que solo vosotros sab&eacute;is</h3>
+    <p class="lead rv" style="margin-bottom:1.2em">Los datos que la web no puede saber y que necesitar&eacute;is en la puerta: n&uacute;meros de confirmaci&oacute;n, horas de reserva, respuestas pendientes. Se guardan en este navegador y aparecen en el <strong>Modo viaje</strong>.</p>
+    <div class="own rv" id="own">
+      <div class="own-f"><label for="o-disney">Entradas Disney &middot; n&ordm; de confirmaci&oacute;n</label><input id="o-disney" data-own="disney" placeholder="Ej. 4XK7-9Q2M" autocomplete="off"><small>El que aparece en My Disney Experience al vincular las entradas.</small></div>
+      <div class="own-f"><label for="o-ogas">Oga&apos;s Cantina o Sci-Fi &middot; martes 29</label><input id="o-ogas" data-own="ogas" placeholder="Ej. Sci-Fi 17:45, conf. 12345678" autocomplete="off"></div>
+      <div class="own-f"><label for="o-beak">The Beak and Barrel &middot; mi&eacute;rcoles 30</label><input id="o-beak" data-own="beak" placeholder="Hora y confirmaci&oacute;n, o 'sin reserva'" autocomplete="off"></div>
+      <div class="own-f"><label for="o-tiffins">Tiffins o Nomad Lounge &middot; jueves 1</label><input id="o-tiffins" data-own="tiffins" placeholder="Hora y confirmaci&oacute;n" autocomplete="off"></div>
+      <div class="own-f"><label for="o-motto">Motto NYC &middot; &iquest;prepagado o se paga al llegar?</label><select id="o-motto" data-own="motto"><option value="">Por confirmar en Booking</option><option value="pre">Prepagado</option><option value="dest">Se paga en el hotel</option></select><small>Si se paga all&iacute;: 1.475 &euro; + 750 $ de fianza en la tarjeta de cr&eacute;dito.</small></div>
+      <div class="own-f"><label for="o-totr">Top of the Rock &middot; viernes 2</label><input id="o-totr" data-own="totr" placeholder="Hora reservada y confirmaci&oacute;n" autocomplete="off"><small>Atardecer a las 18:36: entrad hacia las 17:50.</small></div>
+      <div class="own-f"><label for="o-broadway">Broadway &middot; martes 6</label><input id="o-broadway" data-own="broadway" placeholder="Obra, teatro y hora" autocomplete="off"></div>
+      <div class="own-f"><label for="o-esim">eSIM</label><input id="o-esim" data-own="esim" placeholder="Airalo / Holafly, instalada s&iacute;/no" autocomplete="off"></div>
+      <div class="own-f"><label for="o-notas">Otras notas</label><input id="o-notas" data-own="notas" placeholder="Lo que quer&aacute;is tener a mano" autocomplete="off"></div>
+    </div>
+    <p class="own-note">Se guarda solo en este dispositivo. Rellenadlo en el m&oacute;vil que vay&aacute;is a llevar.</p>
 
     <h3 class="display d-l rv mt-l" style="margin-bottom:.6em">El dinero</h3>
     <div class="money rv">
@@ -2349,6 +2431,21 @@ a.inl:hover{border-bottom-color:var(--ember)}
     </div>
   </div>
   <div class="tm-body">
+    <div class="tm-blk" id="tmHoy" hidden>
+      <h3>Hoy</h3>
+      <div id="tmHoyIn"></div>
+    </div>
+    <div class="tm-blk">
+      <h3>Vuestras reservas</h3>
+      <div class="tm-row"><span class="k">Entradas Disney</span><span class="v tm-own" data-own-out="disney"></span></div>
+      <div class="tm-row"><span class="k">Martes 29 &middot; Oga&apos;s / Sci-Fi</span><span class="v tm-own" data-own-out="ogas"></span></div>
+      <div class="tm-row"><span class="k">Mi&eacute;rcoles 30 &middot; Beak and Barrel</span><span class="v tm-own" data-own-out="beak"></span></div>
+      <div class="tm-row"><span class="k">Jueves 1 &middot; Tiffins / Nomad</span><span class="v tm-own" data-own-out="tiffins"></span></div>
+      <div class="tm-row"><span class="k">Top of the Rock &middot; viernes 2</span><span class="v tm-own" data-own-out="totr"></span></div>
+      <div class="tm-row"><span class="k">Broadway &middot; martes 6</span><span class="v tm-own" data-own-out="broadway"></span></div>
+      <div class="tm-row"><span class="k">Motto &middot; pago</span><span class="v tm-own" data-own-out="motto"></span></div>
+      <div class="tm-row"><span class="k">Notas</span><span class="v tm-own" data-own-out="notas"></span></div>
+    </div>
     <div class="tm-blk">
       <h3>Vuelos</h3>
       <div class="tm-row"><span class="k">Localizador Iberia</span><span class="v">K01BD</span></div>
@@ -2391,9 +2488,9 @@ a.inl:hover{border-bottom-color:var(--ember)}
       <div class="tm-row"><span class="k">Metro de Nueva York</span><span class="v">OMNY &middot; 3 $/viaje</span></div>
       <div class="tm-row"><span class="k">AirTrain JFK</span><span class="v">8,75 $ &middot; 2&ordm; pax 4,50 $</span></div>
       <div class="tm-row"><span class="k">Propina con camarero</span><span class="v">18-20 %</span></div>
-      <div class="tm-row"><span class="k">Shuttle Sheraton &rarr; EPCOT</span><span class="v">10:20 &middot; vuelta 22:15</span></div>
-      <div class="tm-row"><span class="k">Shuttle Sheraton &rarr; Hollywood</span><span class="v">09:55 &middot; vuelta 16:15</span></div>
+      <div class="tm-row"><span class="k">Shuttle Sheraton &rarr; Hollywood</span><span class="v">09:55 o 11:40 &middot; vuelta 16:15</span></div>
       <div class="tm-row"><span class="k">Magic Kingdom</span><span class="v">Sin shuttle &middot; Uber ~14 $</span></div>
+      <div class="tm-row"><span class="k">Animal Kingdom</span><span class="v">Sin shuttle &middot; Uber 16-23 $</span></div>
     </div>
   </div>
 </div>
@@ -2680,6 +2777,116 @@ a.inl:hover{border-bottom-color:var(--ember)}
       }).catch(function(){ swReady = false; paintNet(); });
     });
   }
+
+
+  /* ---------- HOY: el cuaderno sabe qu\u00e9 d\u00eda es ---------- */
+  var SCHED = {
+    '2026-09-28': {t:'Madrid \u2192 Nueva York \u2192 Orlando', s:'D\u00eda de tr\u00e1nsito. Tres horas antes en la T4S, ocho de vuelo, seis y media de escala y otras tres hasta Florida. Lleg\u00e1is al Sheraton de madrugada: el hotel lo sabe y tiene la reserva pre-registrada.',
+      i:[['07:00','Salir de casa hacia Barajas'],['07:30','T4S \u00b7 mostradores Iberia/American \u00b7 sin maleta facturada a la ida'],['10:25','IB4001 despega \u00b7 asientos y pasaportes a mano'],['12:25','Aterrizaje JFK T8 (hora local) \u00b7 inmigraci\u00f3n, tened el ESTA en el m\u00f3vil'],['13:00','Lightning Lane de Animal Kingdom (jueves 1): comprarlo AHORA en la app, se abri\u00f3 mientras volabais','warn'],['~14:00','AirTrain T8 \u2192 T5 \u00b7 10 min \u00b7 comer con calma'],['20:45','JetBlue B60283 \u00b7 T5 \u00b7 localizador GNVEMX'],['23:51','Aterrizaje MCO \u00b7 Uber al Sheraton (~18 $)'],['00:30','Check-in Sheraton \u00b7 conf. 5687.963.492 \u00b7 PIN 7386 \u00b7 reserva pre-registrada, llevar la respuesta del hotel a mano']]},
+    '2026-09-29': {t:'Hollywood Studios', s:'Parque de 9:00 a 21:00. Empezad tarde: anoche llegasteis a las 00:30. Es el \u00fanico d\u00eda con shuttle del hotel y el \u00fanico con noche larga.',
+      i:[['09:45','En la parada del shuttle (lobby), 10 min antes \u00b7 salida 09:55 \u00b7 o el de 11:40'],['10:30','Rock \u2019n\u2019 Roller Coaster (single rider) y Smugglers Run (single rider) antes de que se llene'],['Multi Pass','22 $/persona \u00b7 Tier 1 a Slinky Dog Dash \u00b7 reservad la siguiente en cuanto escane\u00e9is'],['Single Pass','Rise of the Resistance 22 $ \u00b7 pedidla para media tarde'],['12:00\u201316:00','Hora de refugio: Tower of Terror, Runaway Railway, Magic of Disney Animation (cierra a las 18:00)'],['17:30','Cena \u00b7 Sci-Fi Dine-In o lounge del Brown Derby sin reserva \u00b7 walk-up de Oga\u2019s en la app'],['20:00','Fantasmic! (segundo pase 21:30) \u00b7 llegar 45 min antes'],['~21:15','Uber al hotel (~11 $) \u00b7 el shuttle de vuelta sali\u00f3 a las 16:15','warn']]},
+    '2026-09-30': {t:'Magic Kingdom', s:'El \u00fanico d\u00eda sin fiesta de Halloween: abre hasta las 22:00 y hay fuegos. No hay shuttle: Uber ida y vuelta. Tren del parque y Carousel of Progress cerrados por obras.',
+      i:[['08:15','Uber al Transportation & Ticket Center (~15 $) \u00b7 ferry o monorra\u00edl hasta la puerta'],['09:00','Apertura \u00b7 TRON con Single Pass (19 $) o Seven Dwarfs (11 $)'],['Multi Pass','27 $/persona \u00b7 Pirates, Haunted Mansion, Big Thunder, Space Mountain'],['13:00','Comer \u00b7 Skipper Canteen (casi siempre hay hueco) \u00b7 Beak and Barrel si ten\u00e9is reserva'],['14:00','Festival of Fantasy Parade'],['19:00','Cena ligera \u00b7 buscar sitio para los fuegos 45 min antes'],['21:30','Happily Ever After sobre el castillo'],['~22:15','Uber de vuelta con recargo (30\u201345 $) \u00b7 o ferry al TTC y Uber desde all\u00ed, m\u00e1s barato','warn']]},
+    '2026-10-01': {t:'Animal Kingdom', s:'De 8:00 a 18:00, y eso hoy es una ventaja: ma\u00f1ana sal\u00eds del hotel antes de las siete. Cinco atracciones grandes; medio d\u00eda largo bien aprovechado.',
+      i:[['07:30','Uber al parque (16\u201323 $) \u00b7 estar en la puerta a las 7:50'],['08:00','Avatar Flight of Passage nada m\u00e1s abrir (o Single Pass 15 $)'],['08:45','Kilimanjaro Safaris antes de las 9: animales activos y cola corta'],['Multi Pass','15 $/persona \u00b7 Everest, Na\u2019vi River, Safaris'],['11:00','Maharajah Jungle Trek y Gorilla Falls \u00b7 Festival of the Lion King'],['13:00','Comer \u00b7 Nomad Lounge (terraza, sin reserva) o Tiffins si ten\u00e9is mesa'],['16:30','Pandora al caer la tarde \u00b7 Expedition Everest sin cola'],['18:00','Cierre \u00b7 Uber al hotel \u00b7 cena tranquila'],['21:00','MALETAS HECHAS \u00b7 alarma 06:00 \u00b7 check-out por la app si se puede','warn']]},
+    '2026-10-02': {t:'Orlando \u2192 Nueva York', s:'Madrug\u00f3n, vuelo corto y tarde libre en Midtown. Aterriz\u00e1is a las 12:05; el Motto no da la habitaci\u00f3n hasta las 16:00, pero guarda maletas.',
+      i:[['06:00','Alarma \u00b7 check-out \u00b7 resort fee (~108 $) en la factura'],['06:45','Uber a MCO Terminal C (~25 min)'],['09:30','JetBlue B60384 \u00b7 GNVEMX'],['12:05','Aterrizaje JFK T5 \u00b7 taxi amarillo, tarifa fija ~95 $ con peajes y propina'],['~13:30','Motto by Hilton \u00b7 152 W 48th St \u00b7 conf. 5638.033.664 \u00b7 PIN 5789 \u00b7 fianza 750 $ en cr\u00e9dito \u00b7 maletas en recepci\u00f3n'],['14:30','Los Tacos No. 1 (229 W 43rd) \u00b7 Bryant Park \u00b7 Grand Central'],['17:50','Top of the Rock \u00b7 atardecer 18:36 \u00b7 crep\u00fasculo hasta 19:03'],['21:45','Desde esta hora la l\u00ednea E no para en 50 St ni 42 St hasta el lunes','warn']]},
+    '2026-10-03': {t:'El r\u00edo, la High Line y Chelsea', s:'S\u00e1bado. La E est\u00e1 cortada en vuestra zona todo el fin de semana: bajad al sur con la A o la C desde 42 St-Port Authority.',
+      i:[['10:00','Metro A o C (NO la E) de 42 St a 14 St'],['10:30','Little Island \u00b7 parque flotante en la calle 13'],['11:30','High Line de sur a norte \u00b7 1 h 15 \u00b7 salida en la calle 16 a Chelsea Market'],['13:00','Comer en Chelsea Market \u00b7 Los Tacos No. 1 o Very Fresh Noodles'],['15:00','Extremo norte de la High Line \u2192 Edge (opcional, 36\u201345 $) o pasear el Village'],['19:00','Cena \u00b7 Carmine\u2019s (200 W 44th, reservar) a dos calles del hotel']]},
+    '2026-10-04': {t:'Brunch y Central Park entero', s:'Domingo. Barney Greengrass no reserva y hay cola: antes de las diez. Luego el parque de norte a sur, dos horas.',
+      i:[['09:15','L\u00ednea 1 hasta 86 St (la 1 no est\u00e1 afectada por las obras)'],['09:45','Barney Greengrass \u00b7 541 Amsterdam Ave \u00b7 solo efectivo o tarjeta, 30\u201345 $'],['11:00','Central Park por la 86 \u00b7 Belvedere Castle \u00b7 The Ramble \u00b7 Bethesda Terrace'],['13:30','The Mall y m\u00fasicos bajo la arcada \u00b7 Columbus Circle'],['15:00','Tarde libre \u00b7 Columbus Circle \u2192 hotel a pie, 20 min'],['19:30','Cena \u00b7 Jacob\u2019s Pickles, 509 Amsterdam Ave']]},
+    '2026-10-05': {t:'El Met sin agobios', s:'Lunes. Autob\u00fas M1-M4 por Madison desde la calle 49: 25 minutos sentados. Las galer\u00edas de arte moderno del Met est\u00e1n cerradas por obras; el resto, abierto.',
+      i:[['09:30','Bus M1/M2/M3/M4 por Madison \u2192 82 St'],['10:00','The Met \u00b7 30 $ \u00b7 tres alas: Egipto y Dendur, pintura europea, ala americana'],['13:00','Caf\u00e9 Sabarsky en la Neue Galerie (5 min a pie) \u00b7 strudel y goulash'],['14:00','Neue Galerie \u00b7 Klimt \u00b7 ~28 $'],['15:30','Bajada por la Quinta hasta la 59 \u00b7 Grand Army Plaza \u00b7 el Plaza'],['16:30','Catedral de San Patricio \u00b7 10 min al hotel']]},
+    '2026-10-06': {t:'Del 11-S a Broadway', s:'Martes. La E ya funciona con normalidad para bajar al World Trade Center. TKTS en South Street Seaport, no en Times Square.',
+      i:[['09:30','L\u00ednea E hasta World Trade Center'],['10:00','Memorial del 11-S (gratis) \u00b7 Oculus \u00b7 museo opcional ~36 $'],['11:30','Wall Street \u00b7 Trinity Church \u00b7 Bolsa'],['12:30','Comer \u00b7 Eataly Downtown, 101 Liberty St'],['14:00','Ferry de Staten Island (gratis) \u00b7 ida y vuelta 50 min \u00b7 pasa junto a la Estatua'],['15:30','TKTS South Street Seaport \u00b7 entradas de esta noche hasta \u221250 %'],['19:00','Broadway \u00b7 llegar 30 min antes']]},
+    '2026-10-07': {t:'MoMA y vuelta a casa', s:'Check-out a las 11:00 dejando maletas en recepci\u00f3n. MoMA a siete minutos. A las 16:00, AirTrain + LIRR: a esa hora la carretera a JFK es una loter\u00eda.',
+      i:[['10:30','MoMA abre \u00b7 28 $ online \u00b7 La noche estrellada, Matisse, Pollock \u00b7 2 h 30'],['11:00','Check-out del Motto (maletas en recepci\u00f3n) \u00b7 reclamar la fianza en 7 d\u00edas'],['13:00','Comer \u00b7 Cafe 2 en el MoMA o Grand Central Oyster Bar'],['15:30','Recoger maletas'],['16:00','Metro a Penn Station \u2192 LIRR a Jamaica \u2192 AirTrain T8 \u00b7 60\u201370 min \u00b7 24\u201328 $ los dos'],['17:30','JFK T8 \u00b7 Iberia \u00b7 maleta facturada 23 kg por persona \u00b7 localizador K01BD'],['20:40','IB0326 \u00b7 buen viaje']]},
+    '2026-10-08': {t:'Madrid', s:'Aterriz\u00e1is a las 10:15 en la T4S. Se acab\u00f3.', i:[['10:15','Llegada Madrid T4S \u00b7 IB0326'],['Despu\u00e9s','Fianza del Motto: se libera 7 d\u00edas tras el check-out \u00b7 cerrad la N26 Go solo cuando no quede ning\u00fan siniestro pendiente']]}
+  };
+  var PRE = [
+    ['2026-09-14','Revisar en My Disney Experience qu\u00e9 reservas de restaurante ten\u00e9is y anotarlas en el panel de datos'],
+    ['2026-09-15','Booking: confirmar si el Motto est\u00e1 prepagado o se paga al llegar'],
+    ['2026-09-18','Comprar e instalar las eSIM (Airalo o Holafly) en Espa\u00f1a'],
+    ['2026-09-20','Reservar Top of the Rock (2 oct, hacia las 17:50) y Broadway (6 oct)'],
+    ['2026-09-22','Comprobar tarjeta N26 f\u00edsica recibida \u00b7 guardar en el m\u00f3vil la p\u00f3liza y el +34 917 876 776'],
+    ['2026-09-24','\u00daltimo d\u00eda de cancelaci\u00f3n gratuita del Sheraton'],
+    ['2026-09-26','13:00 \u00b7 Lightning Lane de Hollywood Studios (martes 29) \u00b7 Multi Pass + Rise of the Resistance','hot'],
+    ['2026-09-27','13:00 \u00b7 Lightning Lane de Magic Kingdom (mi\u00e9rcoles 30) \u00b7 Multi Pass + TRON','hot'],
+    ['2026-09-27','10:25 \u00b7 Tarjetas de embarque de Iberia (24 h antes) \u00b7 iberia.com, K01BD, apellido Escur\u00edn'],
+    ['2026-09-27','Maletas \u00b7 200\u2013300 $ en billetes peque\u00f1os \u00b7 adaptadores \u00b7 ponchos \u00b7 botiqu\u00edn con Nolotil'],
+    ['2026-09-28','07:00 \u00b7 Salir de casa \u00b7 el LL de Animal Kingdom se abre a las 13:00 con vosotros en el aire: comprarlo al aterrizar','hot']
+  ];
+  var DIAS = ['domingo','lunes','martes','mi\u00e9rcoles','jueves','viernes','s\u00e1bado'];
+  var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  function keyOf(d){ return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+  function fmt(k){ var p = k.split('-'); var d = new Date(+p[0], +p[1]-1, +p[2]); return DIAS[d.getDay()] + ' ' + d.getDate() + ' de ' + MESES[d.getMonth()]; }
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderHoy(){
+    var box = document.getElementById('hoy'); if (!box) return;
+    var now = new Date(); var k = keyOf(now);
+    var K = document.getElementById('hoyK'), T = document.getElementById('hoyT'), S = document.getElementById('hoyS'), L = document.getElementById('hoyL'), N = document.getElementById('hoyN');
+    var tmHoy = document.getElementById('tmHoy'), tmIn = document.getElementById('tmHoyIn');
+    var keys = Object.keys(SCHED).sort();
+    if (SCHED[k]) {
+      var d = SCHED[k];
+      K.textContent = 'Hoy \u00b7 ' + fmt(k);
+      T.textContent = d.t; S.textContent = d.s;
+      L.innerHTML = d.i.map(function(it){ return '<li' + (it[2] ? ' class="' + it[2] + '"' : '') + '><b>' + esc(it[0]) + '</b><span>' + esc(it[1]) + '</span></li>'; }).join('');
+      var idx = keys.indexOf(k); var nk = keys[idx+1];
+      if (nk && SCHED[nk]) {
+        N.innerHTML = '<h3>Ma\u00f1ana \u00b7 ' + esc(fmt(nk)) + '</h3><p class="t">' + esc(SCHED[nk].t) + '</p><p>' + esc(SCHED[nk].s) + '</p>';
+      } else { N.innerHTML = '<h3>Fin del viaje</h3><p>Buen regreso.</p>'; }
+      box.hidden = false;
+      if (tmHoy && tmIn) { tmHoy.hidden = false; tmIn.innerHTML = '<div class="tm-row"><span class="k">' + esc(d.t) + '</span></div>' + d.i.map(function(it){ return '<div class="tm-row"><span class="k">' + esc(it[1]) + '</span><span class="v">' + esc(it[0]) + '</span></div>'; }).join(''); }
+      return;
+    }
+    if (k < keys[0]) {
+      var dd = Math.round((new Date(2026,8,28) - new Date(now.getFullYear(),now.getMonth(),now.getDate())) / 86400000);
+      K.textContent = 'Cuenta atr\u00e1s \u00b7 ' + fmt(k);
+      T.textContent = dd === 1 ? 'Ma\u00f1ana se sale' : 'Faltan ' + dd + ' d\u00edas';
+      S.textContent = 'Lo que hay que ir cerrando de aqu\u00ed al despegue, por fecha. Lo pasado se tacha solo.';
+      var upcoming = PRE.filter(function(p){ return p[0] >= k; }).slice(0, 8);
+      var past = PRE.filter(function(p){ return p[0] < k; }).slice(-2);
+      L.className = 'today-cd';
+      L.innerHTML = past.concat(upcoming).map(function(p){
+        var cls = (p[0] < k ? 'done' : '') + (p[2] === 'hot' ? ' hot' : '');
+        var pp = p[0].split('-'); var pd = new Date(+pp[0], +pp[1]-1, +pp[2]);
+        var lab = p[0] === k ? 'HOY' : DIAS[pd.getDay()].slice(0,3) + ' ' + pd.getDate() + ' ' + MESES[pd.getMonth()].slice(0,3);
+        return '<li class="' + cls.trim() + '"><b>' + esc(lab) + '</b><span>' + esc(p[1]) + '</span></li>';
+      }).join('');
+      var first = SCHED[keys[0]];
+      N.innerHTML = '<h3>Primer d\u00eda \u00b7 ' + esc(fmt(keys[0])) + '</h3><p class="t">' + esc(first.t) + '</p><p>' + esc(first.s) + '</p>';
+      box.hidden = false;
+    }
+  }
+  renderHoy();
+
+  /* ---------- Datos propios: lo que solo el viajero sabe ---------- */
+  var OWN = 'usa2026.own.v1';
+  function ownLoad(){ try { return JSON.parse(localStorage.getItem(OWN) || '{}'); } catch(e){ return {}; } }
+  function ownSave(o){ try { localStorage.setItem(OWN, JSON.stringify(o)); } catch(e){} }
+  var ownLabels = {motto:{pre:'Prepagado', dest:'Se paga en el hotel'}};
+  function ownPaint(){
+    var o = ownLoad();
+    [].forEach.call(document.querySelectorAll('[data-own-out]'), function(el){
+      var k = el.getAttribute('data-own-out'); var v = o[k] || '';
+      if (ownLabels[k] && ownLabels[k][v]) v = ownLabels[k][v];
+      el.textContent = v || 'Sin anotar';
+      el.classList.toggle('empty', !v);
+    });
+  }
+  (function(){
+    var o = ownLoad();
+    [].forEach.call(document.querySelectorAll('[data-own]'), function(el){
+      var k = el.getAttribute('data-own');
+      if (o[k] !== undefined) el.value = o[k];
+      var save = function(){ var s = ownLoad(); s[k] = el.value.trim(); ownSave(s); ownPaint(); };
+      el.addEventListener('change', save);
+      el.addEventListener('input', save);
+    });
+    ownPaint();
+  })();
 
   /* ---------- Respeta la preferencia de movimiento reducido en SVG ---------- */
   function applyMotion(){
