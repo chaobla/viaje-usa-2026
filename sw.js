@@ -1,6 +1,6 @@
-/* USA 2026 ‚Äî cuaderno de viaje offline
-   Cachea la p√°gina y los recursos para que funcione sin conexi√≥n. */
-var CACHE = 'usa2026-v1';
+/* USA 2026 - cuaderno de viaje offline
+   Cachea la pagina y los recursos para que funcione sin conexion. */
+var CACHE = 'usa2026-v2';
 var CORE = ['./', './index.html'];
 
 self.addEventListener('install', function(e){
@@ -22,12 +22,15 @@ self.addEventListener('fetch', function(e){
   var req = e.request;
   if (req.method !== 'GET') return;
 
-  // El documento: red primero, cach√© como red de seguridad
+  // El documento: red primero, cache como red de seguridad
   if (req.mode === 'navigate') {
     e.respondWith(
       fetch(req).then(function(res){
-        var copy = res.clone();
-        caches.open(CACHE).then(function(c){ c.put('./index.html', copy); });
+        // Solo se guarda una respuesta buena: nunca un 401 de la contrasena
+        if (res && res.ok) {
+          var copy = res.clone();
+          caches.open(CACHE).then(function(c){ c.put('./index.html', copy); });
+        }
         return res;
       }).catch(function(){
         return caches.match('./index.html').then(function(r){ return r || caches.match('./'); });
@@ -36,7 +39,7 @@ self.addEventListener('fetch', function(e){
     return;
   }
 
-  // Tipograf√≠as e im√°genes: cach√© primero, y se guarda al vuelo
+  // Tipografias e imagenes: cache primero, y se guarda al vuelo
   e.respondWith(
     caches.match(req).then(function(hit){
       if (hit) return hit;
