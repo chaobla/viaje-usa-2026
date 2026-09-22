@@ -1,6 +1,6 @@
 /* USA 2026 - cuaderno de viaje offline
    Cachea la pagina y los recursos para que funcione sin conexion. */
-var CACHE = 'usa2026-v2';
+var CACHE = 'usa2026-v3';
 var CORE = ['./', './index.html'];
 
 self.addEventListener('install', function(e){
@@ -21,6 +21,8 @@ self.addEventListener('activate', function(e){
 self.addEventListener('fetch', function(e){
   var req = e.request;
   if (req.method !== 'GET') return;
+  // Prevision del tiempo y tipo de cambio: siempre a la red (la pagina guarda su copia)
+  if (/open-meteo\.com|currency-api/.test(req.url)) return;
 
   // El documento: red primero, cache como red de seguridad
   if (req.mode === 'navigate') {
