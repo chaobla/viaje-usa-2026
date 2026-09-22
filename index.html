@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#14110f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="USA 2026">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="googlebot" content="noindex, nofollow">
 <meta property="og:type" content="website">
@@ -1058,6 +1064,47 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
 .gchips{margin:.3em 0 0;display:flex;flex-wrap:wrap;gap:0}
 .grid > *{min-width:0}
 .alert .stops li{overflow-wrap:anywhere}
+
+/* ================= iPhone: usabilidad tactil, legibilidad y zonas seguras ================= */
+.nav{padding-top:max(14px,env(safe-area-inset-top));padding-left:max(var(--gut),env(safe-area-inset-left));padding-right:max(var(--gut),env(safe-area-inset-right))}
+.nav-close,.nav-tm{display:none}
+.tm-head{padding-top:max(14px,env(safe-area-inset-top))!important}
+.tm-body{padding-bottom:calc(80px + env(safe-area-inset-bottom))!important}
+.foot{padding-bottom:calc(clamp(30px,4vw,50px) + env(safe-area-inset-bottom))}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+a,button,label,select,input{-webkit-tap-highlight-color:rgba(207,67,24,.18)}
+#tmHoy .tm-row{display:grid;grid-template-columns:3.8em minmax(0,1fr);gap:.8em;align-items:baseline}
+#tmHoy .tm-row .v{order:-1;text-align:left}
+#nyDays > article{scroll-margin-top:130px}
+@media (max-width:1080px){
+  .nav-links{padding-top:max(24px,env(safe-area-inset-top));padding-bottom:max(24px,env(safe-area-inset-bottom));overflow-y:auto}
+  .nav-close{display:block;position:absolute;top:max(14px,env(safe-area-inset-top));right:20px;background:none;border:1px solid var(--rule-ink);color:var(--on-ink);font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.8em 1em;min-height:44px;cursor:pointer}
+  .nav-tm{display:block;margin-top:14px;background:var(--ember);color:#fff;border:0;font:inherit;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;padding:1em 1.2em;min-height:48px;cursor:pointer}
+  .nav-links a{min-height:44px;display:flex;align-items:center}
+  .nav-burger{padding:14px;margin:-14px -10px -14px 0}
+  .nav-cta{min-height:40px;padding:.75em 1em}
+}
+@media (max-width:640px){
+  .gmap{min-height:38px;padding:.55em .85em;font-size:.68rem;margin-top:.45em}
+  .routes a{min-height:50px;font-size:.92rem}
+  .ck-item{min-height:44px;align-items:center;padding:.35em 0}
+  .tip-src{min-height:44px;display:flex;align-items:center}
+  .map-tab{min-height:44px}
+  .stops .meta{font-size:.72rem;letter-spacing:.05em;line-height:1.45}
+  .pill{font-size:.68rem;padding:.45em .7em}
+  .bp-data b,.hs-k,.card-n,.alert-i,.tbl th,.routes-k,.wx-when,.calc label,.daytabs-hint{font-size:.7rem}
+  .tbl td.num{font-size:.8rem}
+  .day-idx{font-size:.74rem}
+  .own-f input,.own-f select,.own-f textarea{font-size:16px}
+  .daytabs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;overflow:visible;padding:6px 0 8px}
+  .daytabs button{padding:.8em .1em;font-size:.62rem;letter-spacing:.04em;min-height:44px;text-align:center;white-space:nowrap}
+}
+@media (max-width:640px){
+  .daytabs button{font-size:.68rem;letter-spacing:.02em}
+  .bp-tag,.bp-date,.dur,.ck-meta,.own-f label,.calc-out dt,.map-key em,.nav-cta{font-size:.7rem}
+  .ck-reset{min-height:40px;padding:.6em 1em;font-size:.7rem}
+  .nav-brand{min-height:44px;display:inline-flex;align-items:center}
+}
 </style>
 </head>
 <body>
@@ -1067,6 +1114,7 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
 <nav class="nav" id="nav">
   <a href="#top" class="nav-brand">USA<span style="color:var(--ember)">&#183;</span>2026 <small>CUADERNO</small></a>
   <div class="nav-links" id="navLinks">
+    <button class="nav-close" id="navClose" type="button" aria-label="Cerrar el men&uacute;">Cerrar &#10005;</button>
     <a href="#itinerario">Itinerario</a>
     <a href="#vuelos">Vuelos</a>
     <a href="#hoteles">Hoteles</a>
@@ -1078,6 +1126,7 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
     <a href="#referencias">Datos</a>
     <a href="#checklist">Checklist</a>
     <a href="#calculadora">Calculadora</a>
+    <button class="nav-tm" id="navTm" type="button">Abrir el Modo viaje</button>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
     <button class="nav-cta" id="tmOpen" type="button">Modo viaje</button>
@@ -2811,8 +2860,8 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
       <p class="calc-lead">Precio de etiqueta + impuesto + propina, en d&oacute;lares y en euros.</p>
       <div class="calc">
         <label>Precio en la etiqueta ($)<input id="cAmt" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0,00"></label>
-        <label>Impuesto<select id="cTax"><option value="8.875">Nueva York 8,875 %</option><option value="0">NY ropa y calzado &lt;110 $ 0 %</option><option value="6.5">Orlando 6,5 %</option><option value="6.625">Nueva Jersey 6,625 %</option><option value="0.0">Ya incluido</option></select></label>
-        <label>Propina<select id="cTip"><option value="0">Mostrador 0 %</option><option value="10">Para llevar 10 %</option><option value="15">Taxi / Uber 15 %</option><option value="18">Mesa 18 %</option><option value="20" selected>Mesa 20 %</option></select></label>
+        <label>Impuesto<select id="cTax"><option value="8.875">NY 8,875 %</option><option value="0">NY ropa &lt;110 $ &middot; 0 %</option><option value="6.5">Orlando 6,5 %</option><option value="6.625">NJ 6,625 %</option><option value="0.0">Incluido</option></select></label>
+        <label>Propina<select id="cTip"><option value="0">Sin propina</option><option value="10">Llevar 10 %</option><option value="15">Taxi 15 %</option><option value="18">Mesa 18 %</option><option value="20" selected>Mesa 20 %</option></select></label>
         <label>1 $ en euros<input id="cRate" type="number" inputmode="decimal" step="0.001" value="0.8715"></label>
       </div>
       <div class="tm-row"><span class="k">Impuesto</span><span class="v" id="cOutTax">&mdash;</span></div>
@@ -2966,6 +3015,8 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     document.body.style.overflow = open ? 'hidden' : '';
   }
+  var navClose = document.getElementById('navClose'); if (navClose) navClose.addEventListener('click', function(){ setMenu(false); burger.focus(); });
+  var navTm = document.getElementById('navTm'); if (navTm) navTm.addEventListener('click', function(){ setMenu(false); var t = document.getElementById('tmOpen'); if (t) t.click(); });
   burger.addEventListener('click', function(e){
     e.stopPropagation();
     setMenu(!navLinks.classList.contains('is-open'));
@@ -3341,7 +3392,9 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
       cards.forEach(function(c){ c.hidden = !(t === 'all' || c.getAttribute('data-day') === t); if (!c.hidden) c.classList.add('in'); });
       wrapD.classList.toggle('one-day', t !== 'all');
     }
-    tabs.addEventListener('click', function(e){ var b = e.target.closest('[data-t]'); if (b) show(b.getAttribute('data-t')); });
+    tabs.addEventListener('click', function(e){ var b = e.target.closest('[data-t]'); if (!b) return; var t = b.getAttribute('data-t'); show(t);
+      var first = t === 'all' ? wrapD : wrapD.querySelector('article:not([hidden])');
+      if (first && first.getBoundingClientRect().top < 0) first.scrollIntoView({block:'start'}); });
     var k = keyOf(new Date()); var todayCard = cards.filter(function(c){ return c.getAttribute('data-date') === k; })[0];
     if (todayCard) show(todayCard.getAttribute('data-day'));
     else if (window.matchMedia('(max-width: 899px)').matches) show('vie');
@@ -3464,7 +3517,6 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
       if (!window.fetch || Date.now() - lastTry < 60000) return; lastTry = Date.now();
       var today = keyOf(new Date());
       var urls = ['https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@' + today + '/v1/currencies/usd.min.json',
-                  'https://' + today + '.currency-api.pages.dev/v1/currencies/usd.min.json',
                   'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json',
                   'https://latest.currency-api.pages.dev/v1/currencies/usd.min.json'];
       (function next(i){
