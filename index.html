@@ -1017,6 +1017,42 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
 .calc-note{font-size:.72rem;color:var(--on-ink-mut);margin:.6em 0 0}
 @media print{.pend,.wx,.daytabs,.daytabs-hint,#calc{display:none!important}}
 .nydays-wrap{position:relative}
+
+/* ---------- Calculadora en la pagina ---------- */
+.calc-page{background:var(--paper-2);border:1px solid var(--rule-paper);padding:clamp(18px,3vw,30px);margin-bottom:clamp(28px,4vw,48px)}
+.calc--paper label{color:var(--on-paper-mut)}
+.calc--paper input,.calc--paper select{color:var(--ink);border-color:var(--rule-paper);background:var(--paper)}
+.calc--paper input:focus,.calc--paper select:focus{outline:2px solid var(--ember-txt);outline-offset:1px}
+@media (min-width:900px){.calc--paper{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.calc-out{margin:.8em 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.calc-out div{border-top:1px solid var(--rule-paper);padding-top:.6em}
+.calc-out dt{font-family:var(--f-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--on-paper-mut)}
+.calc-out dd{margin:.2em 0 0;font-size:1.05rem;font-weight:600}
+.calc-out-tot dd{color:var(--ember-txt);font-size:1.2rem}
+@media (max-width:520px){.calc-out{grid-template-columns:minmax(0,1fr)}}
+.calc-note--paper{color:var(--on-paper-mut)}
+
+.calc-note.stale{color:var(--ember-2)}
+.calc-note--paper.stale{color:var(--ember-txt)}
+
+/* ---------- Calculadora destacada en el Modo viaje ---------- */
+.tm-blk.calc-hero{background:var(--paper);color:var(--ink);border:0;border-top:5px solid var(--ember);padding:clamp(20px,4vw,30px);margin-bottom:18px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.calc-hero .calc-k{display:inline-block;font-family:var(--f-mono);font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;background:var(--ember);color:#fff;padding:.35em .7em;margin-bottom:.8em}
+.calc-hero h3{font-family:var(--f-display);font-weight:600;font-variation-settings:"WONK" 1;font-size:clamp(1.7rem,6vw,2.3rem)!important;line-height:1;letter-spacing:-.02em;text-transform:none!important;color:var(--ink)!important;margin:0 0 .25em!important}
+.calc-hero .calc-lead{margin:0 0 1em;color:var(--on-paper-mut);font-size:.9rem}
+.calc-hero .calc label{color:var(--on-paper-mut)}
+.calc-hero .calc input,.calc-hero .calc select{color:var(--ink);background:var(--paper-2);border-color:rgba(20,17,15,.28);font-weight:600}
+.calc-hero .calc input:focus,.calc-hero .calc select:focus{outline:2px solid var(--ember);outline-offset:1px}
+.calc-hero #cAmt{font-size:1.6rem;padding:.4em .5em}
+.calc-hero .tm-row{border-color:rgba(20,17,15,.14)}
+.calc-hero .tm-row .k{color:var(--on-paper-mut)}
+.calc-hero .tm-row .v{color:var(--ink)}
+.calc-hero .calc-total{background:var(--ink);margin:.6em calc(-1 * clamp(20px,4vw,30px)) 0;padding:1em clamp(20px,4vw,30px);border:0;display:grid;gap:.2em}
+.calc-hero .calc-total .k{color:var(--on-ink-mut);font-family:var(--f-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase}
+.calc-hero .calc-total .v{color:var(--ember-2)!important;font-family:var(--f-display);font-size:clamp(1.9rem,8vw,2.6rem);line-height:1.05;text-align:left}
+.calc-hero .calc-note{color:var(--on-paper-mut);margin-top:1em}
+.calc-hero .calc-note.stale{color:var(--ember-txt)}
+@media (max-width:420px){.calc-hero .calc{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.calc-hero .calc label:first-child{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -1036,6 +1072,7 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
     <a href="#consejos">Consejos</a>
     <a href="#referencias">Datos</a>
     <a href="#checklist">Checklist</a>
+    <a href="#calculadora">Calculadora</a>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
     <button class="nav-cta" id="tmOpen" type="button">Modo viaje</button>
@@ -1180,7 +1217,7 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
         <div class="day-idx"><b>06</b>3&ndash;6 oct</div>
         <div class="day-body">
           <h3>Manhattan, cuatro d&iacute;as completos</h3>
-          <p>S&aacute;bado de r&iacute;o y mercados, domingo de brunch y Central Park, lunes en el Met y martes en el sur de la isla con Broadway al final. Todo a pie o en metro desde la calle 48 Oeste.</p>
+          <p>S&aacute;bado de r&iacute;o, pizza y el Edge al atardecer, domingo de brunch, dinosaurios y Central Park, lunes de compras en Nueva Jersey y martes en el sur de la isla con Broadway al final. Todo a pie o en metro desde la calle 48 Oeste.</p>
           <span class="pill pill--stamp">Plan completo abajo</span>
         </div>
         <div class="day-media rv-img"><img src="https://images.unsplash.com/photo-1546436836-07a91091f160?w=1000&amp;q=80&amp;auto=format&amp;fit=crop" width="1000" alt="El Empire State entre rascacielos al atardecer" loading="lazy"></div>
@@ -1682,22 +1719,23 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
 
       <article class="card rv rv-1" data-day="sab" data-date="2026-10-03">
         <span class="card-n">S&Aacute;BADO 3</span>
-        <h4>El r&#237;o, la mejor pizza y el Met de noche</h4>
+        <h4>El r&#237;o, la mejor pizza y el Edge al atardecer</h4>
         <ol class="stops">
           <li><b>Little Island</b><span>Un parque flotante sobre tulipas de hormig&#243;n, a la altura de la calle 13.</span><span class="meta">Gratis &#183; 45 min &#183; l&#237;nea A o C a 14 St (la E no para ese finde)</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Little%20Island%2C%20Pier%2055%2C%20Hudson%20River%20Park%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">Mapa &#8599;</a></li>
           <li><b>L&apos;Industrie Pizzeria, West Village</b><span>La pizza que el v&#237;deo pone por delante de todas: la porci&#243;n de burrata, masa fina tostada y parmesano, en barra y sin camareros. Llegad a la apertura, que luego hay cola.</span><span class="meta">104 Christopher St &#183; 5,75 $ &#183; desde 12:00 &#183; 16 min a pie</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=L%27Industrie%20Pizzeria%2C%20104%20Christopher%20St%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">Mapa &#8599;</a></li>
           <li><b>The High Line y Chelsea Market</b><span>Entrada por Gansevoort y de sur a norte con Manhattan a la altura del segundo piso. Bajad en la 16 para picar en Chelsea Market (Los Tacos No. 1, lobster roll de Lobster Place) y seguid hasta Hudson Yards.</span><span class="meta">Gratis &#183; 2 h &#183; termina en la 34</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=High%20Line%2C%20Gansevoort%20St%20entrance%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">Mapa &#8599;</a></li>
-          <li><b>The Met hasta las 20:00</b><span>Los s&#225;bados abre hasta las 21:00 y a partir de las cinco se vac&#237;a. Desde Hudson Yards, l&#237;nea 7 a Grand Central y 6 hasta 86 St. Tres alas y rend&#237;os con gusto: Egipto y el Templo de Dendur, pintura europea, ala americana.</span><span class="meta">30 $ &#183; 3 h &#183; 30 min de metro</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Metropolitan%20Museum%20of%20Art%2C%201000%205th%20Ave%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">Mapa &#8599;</a></li>
+          <li><b>Galer&#237;as de Chelsea</b><span>Al bajar de la High Line por la 24, las grandes galer&#237;as de arte (Gagosian, Pace, David Zwirner) abren los s&#225;bados de 10:00 a 18:00 y son gratis. Sin reservar nada, a vuestro ritmo, y de ah&#237; a Hudson Yards por la propia High Line.</span><span class="meta">Gratis &#183; 1 h &#183; calles 24 y 25 Oeste</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Gagosian%2C%20555%20W%2024th%20St%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">Mapa &#8599;</a></li>
+          <li><b>Edge al atardecer</b><span>La terraza en voladizo m&#225;s alta del hemisferio occidental, con suelo de cristal a 335 metros y el sol cayendo sobre el Hudson a las 18:35. Entrad hacia las 17:30 y quedaos hasta que se enciendan las luces de Midtown, sobre las 19:00: una vez dentro no hay l&#237;mite de tiempo.</span><span class="meta">desde 42 $ + 2 $ &#183; 9:00-22:00 &#183; entrada por la planta 4 del centro comercial</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Edge%2C%2030%20Hudson%20Yards%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">Mapa &#8599;</a></li>
         </ol>
-        <div class="routes"><span class="routes-k">Recorridos del d&#237;a en Google Maps</span><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&amp;destination=Little%20Island%2C%20Pier%2055%2C%20Hudson%20River%20Park%2C%20New%20York%2C%20NY&amp;travelmode=transit" target="_blank" rel="noopener"><span>01</span>Metro al Little Island</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Little%20Island%2C%20Pier%2055%2C%20Hudson%20River%20Park%2C%20New%20York%2C%20NY&amp;destination=Hudson%20Yards%2C%20New%20York%2C%20NY&amp;travelmode=walking&amp;waypoints=L%27Industrie%20Pizzeria%2C%20104%20Christopher%20St%2C%20New%20York%2C%20NY%7CHigh%20Line%2C%20Gansevoort%20St%20entrance%2C%20New%20York%2C%20NY%7CChelsea%20Market%2C%2075%209th%20Ave%2C%20New%20York%2C%20NY" target="_blank" rel="noopener"><span>02</span>A pie: L'Industrie, High Line y Chelsea Market</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Hudson%20Yards%2C%20New%20York%2C%20NY&amp;destination=The%20Metropolitan%20Museum%20of%20Art%2C%201000%205th%20Ave%2C%20New%20York%2C%20NY&amp;travelmode=transit" target="_blank" rel="noopener"><span>03</span>Metro de Hudson Yards al Met</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=The%20Metropolitan%20Museum%20of%20Art%2C%201000%205th%20Ave%2C%20New%20York%2C%20NY&amp;destination=Burger%20Joint%2C%20119%20W%2056th%20St%2C%20New%20York%2C%20NY&amp;travelmode=transit" target="_blank" rel="noopener"><span>04</span>Del Met a Burger Joint</a></div>
+        <div class="routes"><span class="routes-k">Recorridos del d&#237;a en Google Maps</span><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&amp;destination=Little%20Island%2C%20Pier%2055%2C%20Hudson%20River%20Park%2C%20New%20York%2C%20NY&amp;travelmode=transit" target="_blank" rel="noopener"><span>01</span>Metro al Little Island</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Little%20Island%2C%20Pier%2055%2C%20Hudson%20River%20Park%2C%20New%20York%2C%20NY&amp;destination=Gagosian%2C%20555%20W%2024th%20St%2C%20New%20York%2C%20NY&amp;travelmode=walking&amp;waypoints=L%27Industrie%20Pizzeria%2C%20104%20Christopher%20St%2C%20New%20York%2C%20NY%7CHigh%20Line%2C%20Gansevoort%20St%20entrance%2C%20New%20York%2C%20NY%7CChelsea%20Market%2C%2075%209th%20Ave%2C%20New%20York%2C%20NY" target="_blank" rel="noopener"><span>02</span>A pie: L'Industrie, High Line y Chelsea Market</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Gagosian%2C%20555%20W%2024th%20St%2C%20New%20York%2C%20NY&amp;destination=Edge%2C%2030%20Hudson%20Yards%2C%20New%20York%2C%20NY&amp;travelmode=walking" target="_blank" rel="noopener"><span>03</span>Galer&#237;as de Chelsea y subida al Edge</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Edge%2C%2030%20Hudson%20Yards%2C%20New%20York%2C%20NY&amp;destination=Burger%20Joint%2C%20119%20W%2056th%20St%2C%20New%20York%2C%20NY&amp;travelmode=transit" target="_blank" rel="noopener"><span>04</span>Del Edge a Burger Joint</a></div>
         <p style="margin-top:1em"><strong>Cenar:</strong> Burger Joint, tras la cortina roja del lobby del Thompson Central Park, <strong>119 W 56th St</strong>, a ocho minutos del hotel. Cheeseburger 17,50 $, se pide en mostrador y la cola de 15-30 minutos forma parte del rito. Hasta las 23:00.</p>
         <div class="alert" style="margin-top:1em">
           <span class="alert-i">Lluvia</span>
-          <div><h4>Si llueve el s&#225;bado</h4><p>Little Island y la High Line se cambian por la <strong>Biblioteca P&#250;blica</strong> de la Quinta con la 42 (gratis, 10-18 h) y <strong>Grand Central</strong>, a cinco minutos. L&apos;Industrie, Chelsea Market y el Met son a cubierto, as&#237; que el resto del d&#237;a no cambia.</p><p style="margin-top:.6em"><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=New%20York%20Public%20Library%20Stephen%20A.%20Schwarzman%20Building%2C%20476%205th%20Ave%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">Biblioteca &#8599;</a></p></div>
+          <div><h4>Si llueve el s&#225;bado</h4><p>Little Island y la High Line se cambian por la <strong>Biblioteca P&#250;blica</strong> de la Quinta con la 42 (gratis, 10-18 h) y <strong>Grand Central</strong>, a cinco minutos. L&apos;Industrie, Chelsea Market y las galer&#237;as son a cubierto. Si la lluvia no deja ver nada desde el Edge, cambiadlo por el <strong>Whitney</strong>, junto al inicio de la High Line (hasta las 18:00, 30 $).</p><p style="margin-top:.6em"><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=New%20York%20Public%20Library%20Stephen%20A.%20Schwarzman%20Building%2C%20476%205th%20Ave%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">Biblioteca &#8599;</a></p></div>
         </div>
-        <div class="alert" style="margin-top:.8em">
-          <span class="alert-i">Nota</span>
-          <div><h4>Edge queda fuera, salvo que lo quer&#225;is mucho</h4><p>Est&#225; justo donde termina la High Line (desde 36 $), pero se comer&#237;a la tarde del Met. En el Met, las galer&#237;as de arte moderno siguen cerradas por la obra del ala Tang hasta 2030; lo dem&#225;s, intacto. Metro ese finde: la L no circula por Manhattan y la E se salta vuestra zona, pero el 7 y el 6 funcionan con normalidad.</p></div>
+        <div class="alert alert--hot" style="margin-top:.8em">
+          <span class="alert-i">Entradas</span>
+          <div><h4>El Edge, sin reservar con semanas</h4><p>Se puede comprar en la taquilla de la planta 4 de The Shops at Hudson Yards, pero el atardecer del s&#225;bado es la franja que antes se agota. Lo seguro es comprarla en edgenyc.com el mismo s&#225;bado por la ma&#241;ana, con la franja de las 17:30: precio din&#225;mico desde 42 $ m&#225;s 2 $ de gesti&#243;n. El City Climb est&#225; cerrado por temporada. Metro ese finde: la L no circula por Manhattan y la E se salta vuestra zona; para volver, la 7 desde 34 St&#8211;Hudson Yards.</p></div>
         </div>
       </article>
 
@@ -1909,13 +1947,12 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
             <thead><tr><th>Qu&eacute;</th><th class="num">Precio 2026</th><th class="num">Antelaci&oacute;n</th></tr></thead>
             <tbody>
               <tr><td data-l="Qu&eacute;">Tranv&iacute;a de Roosevelt Island</td><td class="num" data-l="Precio 2026">3 $ / trayecto</td><td class="num" data-l="Antelaci&oacute;n">sin reserva</td></tr>
-              <tr><td data-l="Qu&eacute;">Edge Hudson Yards</td><td class="num" data-l="Precio 2026">desde 36 $</td><td class="num" data-l="Antelaci&oacute;n">2&ndash;3 semanas</td></tr>
+              <tr><td data-l="Qu&eacute;">Edge Hudson Yards &middot; s&aacute;bado 17:30</td><td class="num" data-l="Precio 2026">desde 42 $ + 2 $</td><td class="num" data-l="Antelaci&oacute;n">online el mismo d&iacute;a o taquilla</td></tr>
               <tr><td data-l="Qu&eacute;">SUMMIT One Vanderbilt</td><td class="num" data-l="Precio 2026">44 $ + 3 $</td><td class="num" data-l="Antelaci&oacute;n">&uacute;ltima entrada 22:30</td></tr>
               <tr><td data-l="Qu&eacute;">Empire State (planta 86)</td><td class="num" data-l="Precio 2026">desde 44 $</td><td class="num" data-l="Antelaci&oacute;n">1&ndash;2 semanas</td></tr>
               <tr><td data-l="Qu&eacute;">Museo de Historia Natural</td><td class="num" data-l="Precio 2026">37 $</td><td class="num" data-l="Antelaci&oacute;n">online con fecha</td></tr>
               <tr><td data-l="Qu&eacute;">Bus NJ Transit a Jersey Gardens</td><td class="num" data-l="Precio 2026">8,45 $ / trayecto</td><td class="num" data-l="Antelaci&oacute;n">app, caduca a los 30 d&iacute;as</td></tr>
               <tr><td data-l="Qu&eacute;">MoMA</td><td class="num" data-l="Precio 2026">30 $</td><td class="num" data-l="Antelaci&oacute;n">1&ndash;2 semanas</td></tr>
-              <tr><td data-l="Qu&eacute;">The Met</td><td class="num" data-l="Precio 2026">30 $</td><td class="num" data-l="Antelaci&oacute;n">no hace falta &middot; s&aacute;b hasta 21:00</td></tr>
               <tr><td data-l="Qu&eacute;">Broadway</td><td class="num" data-l="Precio 2026">99&ndash;250 $</td><td class="num" data-l="Antelaci&oacute;n">1&ndash;3 meses</td></tr>
               <tr><td data-l="Qu&eacute;">TKTS (mismo d&iacute;a)</td><td class="num" data-l="Precio 2026">hasta &minus;50 %</td><td class="num" data-l="Antelaci&oacute;n">presencial</td></tr>
               <tr><td data-l="Qu&eacute;">Estatua de la Libertad</td><td class="num" data-l="Precio 2026">25,50 $</td><td class="num" data-l="Antelaci&oacute;n">1&ndash;2 meses</td></tr>
@@ -1960,7 +1997,7 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
       <span class="alert-i">Obras</span>
       <div>
         <h4>El fin de semana que lleg&aacute;is, la l&iacute;nea E no para en vuestra zona</h4>
-        <p>Del viernes 2 a las 21:45 al lunes 5 a las 05:00, la <strong>E hacia el sur se salta 7 Av, 50 St, 42 St-Port Authority, 34 St-Penn, 23 St y 14 St</strong>, y tampoco para en Spring St, Canal ni World Trade Center. Para el s&aacute;bado de la High Line usad la <strong>A o la C</strong> desde 42 St hasta 14 St; la ida al Met es en 7 y 6, que s&iacute; funcionan, y el lunes a Port Authority vais andando. La L tampoco circula por Manhattan ese fin de semana; no os afecta. El martes 6 la E ya funciona con normalidad para bajar al 11-S.</p>
+        <p>Del viernes 2 a las 21:45 al lunes 5 a las 05:00, la <strong>E hacia el sur se salta 7 Av, 50 St, 42 St-Port Authority, 34 St-Penn, 23 St y 14 St</strong>, y tampoco para en Spring St, Canal ni World Trade Center. Para el s&aacute;bado de la High Line usad la <strong>A o la C</strong> desde 42 St hasta 14 St; de vuelta del Edge, la 7 desde 34 St&#8211;Hudson Yards, que s&iacute; funciona, y el lunes a Port Authority vais andando. La L tampoco circula por Manhattan ese fin de semana; no os afecta. El martes 6 la E ya funciona con normalidad para bajar al 11-S.</p>
       </div>
     </div>
 
@@ -2023,9 +2060,9 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
 <text x="173.1" y="411.4" text-anchor="start" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#cf4318" fill-opacity=".9" paint-order="stroke" stroke="#faf7ee" stroke-width="4">2 km</text>
 <text x="-54.9" y="411.4" text-anchor="start" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#cf4318" fill-opacity=".9" paint-order="stroke" stroke="#faf7ee" stroke-width="4">4 km</text>
 <text x="-511.0" y="411.4" text-anchor="start" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#cf4318" fill-opacity=".9" paint-order="stroke" stroke="#faf7ee" stroke-width="4">8 km</text>
-<g class="map-pt" tabindex="0" data-i="2"><title>The Met &#8212; 2.8 km &#183; 34 min andando</title>
+<g class="map-pt" tabindex="0" data-i="2"><title>The Met &#183; fuera del plan &#8212; 2.8 km &#183; 34 min andando</title>
 <circle class="map-hit" cx="582.6" cy="160.0" r="26"/>
-<circle cx="582.6" cy="160.0" r="11" fill="#14110f" stroke="#faf7ee" stroke-width="2.5"/>
+<circle cx="582.6" cy="160.0" r="11" fill="#8a7f74" stroke="#faf7ee" stroke-width="2.5"/>
 <text x="582.6" y="164.2" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11.5" font-weight="700" fill="#faf7ee">2</text>
 </g>
 <g class="map-pt" tabindex="0" data-i="3"><title>Central Park &#183; entrada sur &#8212; 1.0 km &#183; 11 min andando</title>
@@ -2116,14 +2153,14 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
           <p>Vuestro hotel est&aacute; en la calle 48 con la Sexta. Casi todo Midtown queda dentro del primer kil&oacute;metro; para lo dem&aacute;s, el metro.</p>
           <ol class="map-key">
 <li data-i="1"><b>1</b><span>Motto by Hilton &#183; vuestro hotel</span><em>vuestra base</em></li>
-<li data-i="2"><b>2</b><span>The Met</span><em>2.8 km &#183; 34 min andando</em></li>
+<li data-i="2" class="off"><b>2</b><span>The Met &#183; fuera del plan</span><em>2.8 km &#183; 34 min andando</em></li>
 <li data-i="3"><b>3</b><span>Central Park &#183; entrada sur</span><em>1.0 km &#183; 11 min andando</em></li>
 <li data-i="4"><b>4</b><span>MoMA</span><em>0.5 km &#183; 6 min andando</em></li>
 <li data-i="5"><b>5</b><span>Rockefeller Center</span><em>0.3 km &#183; 3 min andando</em></li>
 <li data-i="6"><b>6</b><span>Times Square</span><em>0.3 km &#183; 3 min andando</em></li>
 <li data-i="7"><b>7</b><span>Grand Central y Summit One Vanderbilt</span><em>0.8 km &#183; 10 min andando</em></li>
 <li data-i="8"><b>8</b><span>Empire State</span><em>1.2 km &#183; 15 min andando</em></li>
-<li data-i="9"><b>9</b><span>Edge &#183; Hudson Yards</span><em>1.6 km &#183; 19 min andando</em></li>
+<li data-i="9"><b>9</b><span>Edge &#183; s&#225;bado 3 al atardecer</span><em>1.6 km &#183; 19 min andando</em></li>
 <li data-i="10"><b>10</b><span>Chelsea Market</span><em>2.7 km &#183; 33 min andando</em></li>
 <li data-i="11"><b>11</b><span>High Line &#183; extremo sur</span><em>3.0 km &#183; 37 min andando</em></li>
 <li data-i="12"><b>12</b><span>Washington Square</span><em>3.4 km &#183; 42 min andando</em></li>
@@ -2657,7 +2694,7 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
       <div class="ck-group rv rv-2">
         <h4>Por decidir</h4>
         <label class="ck-item"><input type="checkbox" data-ck="uber"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Instalar Uber o Lyft con m&eacute;todo de pago</span></label>
-        <label class="ck-item"><input type="checkbox" data-ck="edge"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">&iquest;Alg&#250;n mirador de pago (Edge, Summit o Empire en taquilla)?</span></label>
+        <label class="ck-item"><input type="checkbox" data-ck="edge"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">Edge: entrada del s&aacute;bado 3 a las 17:30, comprada esa ma&ntilde;ana en edgenyc.com</span></label>
         <label class="ck-item"><input type="checkbox" data-ck="museo11s"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">&iquest;Museo del 11-S o solo el memorial?</span></label>
         <label class="ck-item"><input type="checkbox" data-ck="brooklyn"><span class="ck-box"><svg viewBox="0 0 12 12"><path d="M1 6l3.5 3.5L11 2.5"/></svg></span><span class="ck-txt">&iquest;Una ma&ntilde;ana en Brooklyn o tour de contrastes?</span></label>
       </div>
@@ -2673,6 +2710,23 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
       <div class="own-f"><label for="o-notas">Otras notas</label><input id="o-notas" data-own="notas" placeholder="Lo que quer&aacute;is tener a mano" autocomplete="off"></div>
     </div>
     <p class="own-note">Se guarda solo en este dispositivo. Rellenadlo en el m&oacute;vil que vay&aacute;is a llevar.</p>
+
+    <h3 class="display d-l rv mt-l" id="calculadora" style="margin-bottom:.4em">Calculadora: cu&#225;nto es de verdad</h3>
+    <p class="lead rv" style="margin-bottom:1.2em">En Estados Unidos el precio de la etiqueta no incluye el impuesto, y en la mesa se a&#241;ade la propina. Poned la cifra y os sale el total en d&#243;lares y en euros, con el cambio oficial del d&#237;a en que lo consult&#233;is. Tambi&#233;n est&#225; en el Modo viaje.</p>
+    <div class="calc-page rv">
+      <div class="calc calc--paper">
+        <label>Precio en la etiqueta ($)<input id="pAmt" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0,00"></label>
+        <label>Impuesto<select id="pTax"><option value="8.875">Nueva York 8,875 %</option><option value="0">NY ropa y calzado &lt;110 $ 0 %</option><option value="6.5">Orlando 6,5 %</option><option value="6.625">Nueva Jersey 6,625 %</option><option value="0.0">Ya incluido</option></select></label>
+        <label>Propina<select id="pTip"><option value="0">Mostrador 0 %</option><option value="10">Para llevar 10 %</option><option value="15">Taxi / Uber 15 %</option><option value="18">Mesa 18 %</option><option value="20" selected>Mesa 20 %</option></select></label>
+        <label>1 $ en euros<input id="pRate" type="number" inputmode="decimal" step="0.001" value="0.8715"></label>
+      </div>
+      <dl class="calc-out">
+        <div><dt>Impuesto</dt><dd id="pOutTax">&mdash;</dd></div>
+        <div><dt>Propina</dt><dd id="pOutTip">&mdash;</dd></div>
+        <div class="calc-out-tot"><dt>Total</dt><dd id="pOutTot">&mdash;</dd></div>
+      </dl>
+      <p class="calc-note calc-note--paper" id="pRateNote">Cambio de referencia; se actualiza solo cuando hay conexi&oacute;n. La propina se calcula sobre el precio sin impuesto.</p>
+    </div>
 
     <h3 class="display d-l rv mt-l" style="margin-bottom:.6em">El dinero</h3>
     <div class="money rv">
@@ -2693,12 +2747,12 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
               <tr><td data-l="Concepto">Resort fee del Sheraton</td><td class="num" style="color:var(--gold)" data-l="Importe">&asymp;108 $</td></tr>
               <tr><td data-l="Concepto">Dep&oacute;sito del Motto (reembolsable)</td><td class="num" style="color:var(--stamp)" data-l="Importe">750 $</td></tr>
               <tr><td data-l="Concepto">Disney &middot; Lightning Lane, comida quick service y Uber</td><td class="num" style="color:var(--gold)" data-l="Importe">&asymp;775 $</td></tr>
-              <tr><td data-l="Concepto">Nueva York &middot; entradas: Met, Historia Natural, MoMA y Broadway en TKTS</td><td class="num" style="color:var(--gold)" data-l="Importe">&asymp;395 $</td></tr>
+              <tr><td data-l="Concepto">Nueva York &middot; entradas: Edge, Historia Natural, MoMA y Broadway en TKTS</td><td class="num" style="color:var(--gold)" data-l="Importe">&asymp;425 $</td></tr>
               <tr><td data-l="Concepto">Nueva York &middot; transporte: AirTrain y metro a la llegada, metro, tranv&iacute;a, bus NJ, AirTrain + LIRR</td><td class="num" style="color:var(--gold)" data-l="Importe">&asymp;155 $</td></tr>
               <tr><td data-l="Concepto">Seguro N26 Go &middot; 2 meses</td><td class="num" style="color:var(--gold)" data-l="Importe">&asymp;20 &euro;</td></tr>
               <tr><td data-l="Concepto">eSIM para los dos</td><td class="num" style="color:var(--gold)" data-l="Importe">&asymp;26 $</td></tr>
               <tr><td data-l="Concepto">Nueva York &middot; comida de mostrador del plan, d&iacute;a a d&iacute;a, con impuesto</td><td class="num" style="color:var(--gold)" data-l="Importe">&asymp;650 $</td></tr>
-              <tr><td data-l="Concepto"><strong>Por gastar all&iacute; (sin el Motto ni compras)</strong></td><td class="num" data-l="Importe"><strong>&asymp;2.110 $ &middot; unos 1.840 &euro;</strong></td></tr>
+              <tr><td data-l="Concepto"><strong>Por gastar all&iacute; (sin el Motto ni compras)</strong></td><td class="num" data-l="Importe"><strong>&asymp;2.140 $ &middot; unos 1.865 &euro;</strong></td></tr>
             </tbody>
           </table>
         </div>
@@ -2737,6 +2791,21 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
     </div>
   </div>
   <div class="tm-body">
+    <div class="tm-blk calc-hero" id="calc">
+      <span class="calc-k">Calculadora</span>
+      <h3>Cu&aacute;nto es de verdad</h3>
+      <p class="calc-lead">Precio de etiqueta + impuesto + propina, en d&oacute;lares y en euros.</p>
+      <div class="calc">
+        <label>Precio en la etiqueta ($)<input id="cAmt" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0,00"></label>
+        <label>Impuesto<select id="cTax"><option value="8.875">Nueva York 8,875 %</option><option value="0">NY ropa y calzado &lt;110 $ 0 %</option><option value="6.5">Orlando 6,5 %</option><option value="6.625">Nueva Jersey 6,625 %</option><option value="0.0">Ya incluido</option></select></label>
+        <label>Propina<select id="cTip"><option value="0">Mostrador 0 %</option><option value="10">Para llevar 10 %</option><option value="15">Taxi / Uber 15 %</option><option value="18">Mesa 18 %</option><option value="20" selected>Mesa 20 %</option></select></label>
+        <label>1 $ en euros<input id="cRate" type="number" inputmode="decimal" step="0.001" value="0.8715"></label>
+      </div>
+      <div class="tm-row"><span class="k">Impuesto</span><span class="v" id="cOutTax">&mdash;</span></div>
+      <div class="tm-row"><span class="k">Propina</span><span class="v" id="cOutTip">&mdash;</span></div>
+      <div class="tm-row calc-total"><span class="k">Total</span><span class="v" id="cOutTot">&mdash;</span></div>
+      <p class="calc-note" id="cRateNote">Cambio de referencia; se actualiza solo cuando hay conexi&oacute;n.</p>
+    </div>
     <div class="tm-blk" id="tmHoy" hidden>
       <h3>Hoy</h3>
       <div id="tmHoyIn"></div>
@@ -2789,19 +2858,6 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
       <div class="tm-row"><span class="k">Orlando &middot; urgencias 7-24 h</span><span class="v"><a href="https://www.google.com/maps/search/?api=1&amp;query=AdventHealth%20Centra%20Care%20Lake%20Buena%20Vista%2C%2012500%20S%20Apopka%20Vineland%20Rd%2C%20Orlando%2C%20FL" target="_blank" rel="noopener">Centra Care 12500 S Apopka</a></span></div>
       <div class="tm-row"><span class="k">NY &middot; farmacia</span><span class="v"><a href="https://www.google.com/maps/search/?api=1&amp;query=CVS%20Pharmacy%2C%201619%20Broadway%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">CVS 1619 Broadway (49th)</a></span></div>
       <div class="tm-row"><span class="k">NY &middot; urgencias sin cita</span><span class="v"><a href="https://www.google.com/maps/search/?api=1&amp;query=CityMD%20West%2042nd%20Urgent%20Care%2C%20345%20W%2042nd%20St%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">CityMD 345 W 42nd St</a></span></div>
-    </div>
-    <div class="tm-blk" id="calc">
-      <h3>Cu&aacute;nto es de verdad</h3>
-      <div class="calc">
-        <label>Precio en la etiqueta ($)<input id="cAmt" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0,00"></label>
-        <label>Impuesto<select id="cTax"><option value="8.875">Nueva York 8,875 %</option><option value="0">NY ropa y calzado &lt;110 $ 0 %</option><option value="6.5">Orlando 6,5 %</option><option value="6.625">Nueva Jersey 6,625 %</option><option value="0.0">Ya incluido</option></select></label>
-        <label>Propina<select id="cTip"><option value="0">Mostrador 0 %</option><option value="10">Para llevar 10 %</option><option value="15">Taxi / Uber 15 %</option><option value="18">Mesa 18 %</option><option value="20" selected>Mesa 20 %</option></select></label>
-        <label>1 $ en euros<input id="cRate" type="number" inputmode="decimal" step="0.001" value="0.871"></label>
-      </div>
-      <div class="tm-row"><span class="k">Impuesto</span><span class="v" id="cOutTax">&mdash;</span></div>
-      <div class="tm-row"><span class="k">Propina (sobre el precio sin impuesto)</span><span class="v" id="cOutTip">&mdash;</span></div>
-      <div class="tm-row calc-total"><span class="k">Total</span><span class="v" id="cOutTot">&mdash;</span></div>
-      <p class="calc-note" id="cRateNote">Cambio de referencia; se actualiza solo cuando hay conexi&oacute;n.</p>
     </div>
     <div class="tm-blk">
       <h3>Recordatorios r&aacute;pidos</h3>
@@ -3115,8 +3171,8 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
       i:[['07:30','Uber al parque (16\u201323 $) \u00b7 estar en la puerta a las 7:50'],['08:00','Avatar Flight of Passage nada m\u00e1s abrir (o Single Pass 15 $)'],['08:45','Kilimanjaro Safaris antes de las 9: animales activos y cola corta'],['Multi Pass','15 $/persona \u00b7 Everest, Na\u2019vi River, Safaris'],['11:00','Maharajah Jungle Trek y Gorilla Falls \u00b7 Festival of the Lion King'],['12:30','Comer por Mobile Order \u00b7 Satu\u2019li Canteen en Pandora (bowl 13,49 $) o Flame Tree Barbecue junto al agua'],['16:30','Pandora al caer la tarde \u00b7 Expedition Everest sin cola'],['18:00','Cierre \u00b7 Uber al hotel \u00b7 cena tranquila'],['21:00','MALETAS HECHAS \u00b7 alarma 06:00 \u00b7 check-out por la app si se puede','warn']]},
     '2026-10-02': {t:'Orlando \u2192 Nueva York', s:'Madrug\u00f3n, vuelo corto, tarde en Midtown y atardecer desde el tranv\u00eda de Roosevelt Island, sin reserva. Aterriz\u00e1is a las 12:05; el Motto no da la habitaci\u00f3n hasta las 16:00, pero guarda maletas.',
       i:[['06:00','Alarma \u00b7 check-out \u00b7 resort fee (~108 $) en la factura \u00b7 en el hotel no abre nada hasta las 7:00 (ni el Zest ni Springboard): Dunkin\u2019 en 12236 S Apopka-Vineland Rd desde las 5:00, o caf\u00e9 en el aeropuerto'],['06:45','Uber a MCO Terminal C (~25 min)'],['09:30','JetBlue B60384 \u00b7 GNVEMX'],['12:05','Aterrizaje JFK T5 \u00b7 AirTrain hacia Jamaica (13,25 $ los dos, se paga al salir)'],['12:40','Metro E en Sutphin Blvd\u2013Archer Av, direcci\u00f3n Manhattan \u00b7 cada uno pasa su tarjeta (3 $)'],['13:00','Cambio a la F en Jackson Heights\u2013Roosevelt Av, mismo and\u00e9n \u00b7 bajar en 47-50 Sts\u2013Rockefeller Center \u00b7 la obra de la E empieza a las 21:45, no os afecta'],['~13:30','Motto by Hilton \u00b7 152 W 48th St \u00b7 conf. 5638.033.664 \u00b7 PIN 5789 \u00b7 fianza 750 $ en cr\u00e9dito \u00b7 maletas en recepci\u00f3n'],['14:30','Los Tacos No. 1 (229 W 43rd) \u00b7 Bryant Park \u00b7 Grand Central'],['17:30','Metro 4, 5 o 6 de Grand Central a 59 St \u00b7 3 min a pie al tranv\u00eda (2nd Ave con la 60)'],['18:00','Tranv\u00eda de Roosevelt Island \u00b7 3 $ con la tarjeta (OMNY), sin reserva \u00b7 atardecer 18:36 desde el paseo oeste y Southpoint Park'],['19:15','Metro F de Roosevelt Island a 57 St \u00b7 10 min'],['19:30','Cena de pie \u00b7 The Halal Guys, carrito de la 53 con la Sexta \u00b7 platter 10\u201313 $'],['21:45','Desde esta hora la l\u00ednea E no para en 50 St ni 42 St hasta el lunes','warn']]},
-    '2026-10-03': {t:'El r\u00edo, la mejor pizza y el Met de noche', s:'S\u00e1bado. La E est\u00e1 cortada en vuestra zona todo el fin de semana: bajad al sur con la A o la C. L\u2019Industrie abre a las 12:00; el Met, hasta las 21:00.',
-      i:[['10:00','Metro A o C (NO la E) de 42 St a 14 St'],['10:30','Little Island \u00b7 parque flotante en la calle 13'],['12:00','L\u2019Industrie Pizzeria, 104 Christopher St \u00b7 porci\u00f3n de burrata 5,75 $ (la favorita del v\u00eddeo) \u00b7 16 min a pie'],['13:00','High Line desde Gansevoort, de sur a norte \u00b7 bajar en la 16 a Chelsea Market a picar \u00b7 seguir hasta Hudson Yards'],['15:15','L\u00ednea 7 de 34 St-Hudson Yards a Grand Central \u2192 6 hasta 86 St \u00b7 30 min'],['15:45','The Met \u00b7 30 $ \u00b7 Egipto y Dendur, pintura europea, ala americana \u00b7 hasta las 20:00'],['20:30','L\u00ednea 6 a 51 St \u00b7 Burger Joint, 119 W 56th (cortina roja del Thompson) \u00b7 cheeseburger 17,50 $ \u00b7 hasta 23:00']]},
+    '2026-10-03': {t:'El r\u00edo, la mejor pizza y el Edge al atardecer', s:'S\u00e1bado. La E est\u00e1 cortada en vuestra zona todo el fin de semana: bajad al sur con la A o la C. Comprad por la ma\u00f1ana en edgenyc.com la entrada del Edge de las 17:30; el sol se pone a las 18:35.',
+      i:[['09:30','Comprar en edgenyc.com la entrada del Edge, franja 17:30 (desde 42 $ + 2 $) \u00b7 o taquilla en la planta 4, con riesgo de que se agote','hot'],['10:00','Metro A o C (NO la E) de 42 St a 14 St'],['10:30','Little Island \u00b7 parque flotante en la calle 13'],['12:00','L\u2019Industrie Pizzeria, 104 Christopher St \u00b7 porci\u00f3n de burrata 5,75 $ (la favorita del v\u00eddeo) \u00b7 16 min a pie'],['13:00','High Line desde Gansevoort, de sur a norte \u00b7 bajar en la 16 a Chelsea Market a picar'],['15:30','Galer\u00edas de Chelsea (calles 24-25, gratis, hasta las 18:00) \u00b7 volver a subir a la High Line hasta Hudson Yards'],['17:30','Edge \u00b7 planta 4 de The Shops at Hudson Yards \u00b7 atardecer 18:35 \u00b7 quedaos hasta que se encienda Midtown, ~19:00'],['19:30','L\u00ednea 7 de 34 St-Hudson Yards a Times Sq \u00b7 Burger Joint, 119 W 56th (cortina roja del Thompson) \u00b7 cheeseburger 17,50 $ \u00b7 hasta 23:00']]},
     '2026-10-04': {t:'Brunch, dinosaurios y Central Park', s:'Domingo. Barney Greengrass no reserva y hay cola: a las nueve. Luego el Museo de Historia Natural a ocho minutos y el parque desde la 81.',
       i:[['08:45','L\u00ednea 1 hasta 86 St (la 1 no est\u00e1 afectada por las obras)'],['09:00','Barney Greengrass \u00b7 541 Amsterdam Ave \u00b7 llevad efectivo \u00b7 30\u201345 $'],['10:30','Museo de Historia Natural \u00b7 Central Park West con la 79 \u00b7 37 $ (entrada comprada online) \u00b7 dinosaurios 4\u00aa planta, Gilder Center, ballena azul, Rose Center'],['13:00','Levain Bakery, 167 W 74th \u00b7 cookie 5,75 $'],['13:30','Central Park por la 81 \u00b7 Belvedere Castle \u00b7 The Ramble \u00b7 Bethesda Terrace \u00b7 The Mall'],['16:00','Salida por la 72 (Strawberry Fields) \u00b7 Gray\u2019s Papaya, 2090 Broadway \u00b7 hot dog 3,45 $'],['16:45','Columbus Circle \u2192 hotel a pie, 20 min'],['20:00','Cena \u00b7 7th Street Burger, 485 7th Ave con la 36 \u00b7 6,50 / 9,50 $']]},
     '2026-10-05': {t:'Jersey Gardens, de compras en Nueva Jersey', s:'Lunes. Autob\u00fas 111 de NJ Transit desde la puerta 223 de Port Authority hasta la puerta del centro comercial. Billetes en la app, activados al subir; el conductor no cobra en la terminal.',
@@ -3127,7 +3183,7 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
       i:[['08:30','Bagel de despedida \u00b7 Ess-a-Bagel, 831 3rd Ave \u00b7 5\u20136 $, con salm\u00f3n 16\u201319 $'],['10:30','MoMA abre \u00b7 30 $ \u00b7 La noche estrellada, Matisse, Pollock \u00b7 2 h 30'],['11:00','Check-out del Motto (maletas en recepci\u00f3n) \u00b7 reclamar la fianza en 7 d\u00edas'],['13:00','Comer \u00b7 Cafe 2 en el MoMA, o Xi\u2019an Famous Foods (24 W 45th) si quer\u00e9is r\u00e1pido'],['15:30','Recoger maletas'],['16:00','Metro a Penn Station \u2192 LIRR a Jamaica \u2192 AirTrain T8 \u00b7 60\u201370 min \u00b7 24\u201328 $ los dos'],['17:30','JFK T8 \u00b7 Iberia \u00b7 maleta facturada 23 kg por persona \u00b7 localizador K01BD'],['20:40','IB0326 \u00b7 buen viaje']]},
     '2026-10-08': {t:'Madrid', s:'Aterriz\u00e1is a las 10:15 en la T4S. Se acab\u00f3.', i:[['10:15','Llegada Madrid T4S \u00b7 IB0326'],['Despu\u00e9s','Fianza del Motto: se libera 7 d\u00edas tras el check-out \u00b7 cerrad la N26 Go solo cuando no quede ning\u00fan siniestro pendiente']]}
   };
-  var ROUTES = {"2026-10-02": [["JFK T5 \u2192 hotel: AirTrain a Jamaica, metro E y F a 47-50 Sts", "https://www.google.com/maps/dir/?api=1&origin=JFK%20Airport%20Terminal%205%2C%20Jamaica%2C%20NY&destination=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&travelmode=transit"], ["Tarde a pie: tacos, Bryant Park y Grand Central", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Grand%20Central%20Terminal%2C%2089%20E%2042nd%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Los%20Tacos%20No.%201%2C%20229%20W%2043rd%20St%2C%20New%20York%2C%20NY%7CBryant%20Park%2C%20New%20York%2C%20NY"], ["Metro 4/5/6 al tranv\u00eda de Roosevelt Island", "https://www.google.com/maps/dir/?api=1&origin=Grand%20Central%20Terminal%2C%2089%20E%2042nd%20St%2C%20New%20York%2C%20NY&destination=Roosevelt%20Island%20Tramway%2C%20E%2060th%20St%20%26%202nd%20Ave%2C%20New%20York%2C%20NY&travelmode=transit"], ["En la isla: paseo hasta Southpoint al atardecer", "https://www.google.com/maps/dir/?api=1&origin=Roosevelt%20Island%20Tram%20Station%2C%20Roosevelt%20Island%2C%20NY&destination=Southpoint%20Park%2C%20Roosevelt%20Island%2C%20NY&travelmode=walking"], ["Vuelta en metro F y cena en Halal Guys", "https://www.google.com/maps/dir/?api=1&origin=Southpoint%20Park%2C%20Roosevelt%20Island%2C%20NY&destination=The%20Halal%20Guys%2C%20W%2053rd%20St%20%26%206th%20Ave%2C%20New%20York%2C%20NY&travelmode=transit"]], "2026-10-03": [["Metro al Little Island", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Little%20Island%2C%20Pier%2055%2C%20Hudson%20River%20Park%2C%20New%20York%2C%20NY&travelmode=transit"], ["A pie: L'Industrie, High Line y Chelsea Market", "https://www.google.com/maps/dir/?api=1&origin=Little%20Island%2C%20Pier%2055%2C%20Hudson%20River%20Park%2C%20New%20York%2C%20NY&destination=Hudson%20Yards%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=L%27Industrie%20Pizzeria%2C%20104%20Christopher%20St%2C%20New%20York%2C%20NY%7CHigh%20Line%2C%20Gansevoort%20St%20entrance%2C%20New%20York%2C%20NY%7CChelsea%20Market%2C%2075%209th%20Ave%2C%20New%20York%2C%20NY"], ["Metro de Hudson Yards al Met", "https://www.google.com/maps/dir/?api=1&origin=Hudson%20Yards%2C%20New%20York%2C%20NY&destination=The%20Metropolitan%20Museum%20of%20Art%2C%201000%205th%20Ave%2C%20New%20York%2C%20NY&travelmode=transit"], ["Del Met a Burger Joint", "https://www.google.com/maps/dir/?api=1&origin=The%20Metropolitan%20Museum%20of%20Art%2C%201000%205th%20Ave%2C%20New%20York%2C%20NY&destination=Burger%20Joint%2C%20119%20W%2056th%20St%2C%20New%20York%2C%20NY&travelmode=transit"]], "2026-10-04": [["Metro a Barney Greengrass", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Barney%20Greengrass%2C%20541%20Amsterdam%20Ave%2C%20New%20York%2C%20NY&travelmode=transit"], ["A pie: museo, Levain y Central Park", "https://www.google.com/maps/dir/?api=1&origin=Barney%20Greengrass%2C%20541%20Amsterdam%20Ave%2C%20New%20York%2C%20NY&destination=Bethesda%20Terrace%2C%20Central%20Park%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=American%20Museum%20of%20Natural%20History%2C%20200%20Central%20Park%20W%2C%20New%20York%2C%20NY%7CLevain%20Bakery%2C%20167%20W%2074th%20St%2C%20New%20York%2C%20NY%7CBelvedere%20Castle%2C%20Central%20Park%2C%20New%20York%2C%20NY"], ["A pie: Strawberry Fields, Gray's Papaya y hotel", "https://www.google.com/maps/dir/?api=1&origin=Bethesda%20Terrace%2C%20Central%20Park%2C%20New%20York%2C%20NY&destination=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Strawberry%20Fields%2C%20Central%20Park%2C%20New%20York%2C%20NY%7CGray%27s%20Papaya%2C%202090%20Broadway%2C%20New%20York%2C%20NY"], ["Cena en 7th Street Burger", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=7th%20Street%20Burger%2C%20485%207th%20Ave%2C%20New%20York%2C%20NY&travelmode=walking"]], "2026-10-05": [["A pie a Port Authority", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Port%20Authority%20Bus%20Terminal%2C%20625%208th%20Ave%2C%20New%20York%2C%20NY&travelmode=walking"], ["Bus 111 a Jersey Gardens", "https://www.google.com/maps/dir/?api=1&origin=Port%20Authority%20Bus%20Terminal%2C%20625%208th%20Ave%2C%20New%20York%2C%20NY&destination=The%20Mills%20at%20Jersey%20Gardens%2C%20651%20Kapkowski%20Rd%2C%20Elizabeth%2C%20NJ&travelmode=transit"], ["Vuelta: Port Authority, Shake Shack y Times Square", "https://www.google.com/maps/dir/?api=1&origin=Port%20Authority%20Bus%20Terminal%2C%20625%208th%20Ave%2C%20New%20York%2C%20NY&destination=Times%20Square%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Shake%20Shack%20Theater%20District%2C%20691%208th%20Ave%2C%20New%20York%2C%20NY"], ["SUMMIT One Vanderbilt", "https://www.google.com/maps/dir/?api=1&origin=Times%20Square%2C%20New%20York%2C%20NY&destination=SUMMIT%20One%20Vanderbilt%2C%2045%20E%2042nd%20St%2C%20New%20York%2C%20NY&travelmode=walking"]], "2026-10-06": [["Metro a Russ & Daughters", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Russ%20%26%20Daughters%2C%20179%20E%20Houston%20St%2C%20New%20York%2C%20NY&travelmode=transit"], ["Metro al Memorial del 11-S", "https://www.google.com/maps/dir/?api=1&origin=Russ%20%26%20Daughters%2C%20179%20E%20Houston%20St%2C%20New%20York%2C%20NY&destination=9%2F11%20Memorial%20%26%20Museum%2C%20180%20Greenwich%20St%2C%20New%20York%2C%20NY&travelmode=transit"], ["A pie: Trinity, Wall Street y el ferry", "https://www.google.com/maps/dir/?api=1&origin=9%2F11%20Memorial%20%26%20Museum%2C%20180%20Greenwich%20St%2C%20New%20York%2C%20NY&destination=Whitehall%20Terminal%2C%204%20South%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Trinity%20Church%2C%2089%20Broadway%2C%20New%20York%2C%20NY%7CNew%20York%20Stock%20Exchange%2C%2011%20Wall%20St%2C%20New%20York%2C%20NY"], ["Del ferry a Vanessa's Dumplings", "https://www.google.com/maps/dir/?api=1&origin=Whitehall%20Terminal%2C%204%20South%20St%2C%20New%20York%2C%20NY&destination=Vanessa%27s%20Dumpling%20House%2C%20118A%20Eldridge%20St%2C%20New%20York%2C%20NY&travelmode=transit"], ["A pie: Eileen's y Hamburger America", "https://www.google.com/maps/dir/?api=1&origin=Vanessa%27s%20Dumpling%20House%2C%20118A%20Eldridge%20St%2C%20New%20York%2C%20NY&destination=Hamburger%20America%2C%2051%20MacDougal%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Eileen%27s%20Special%20Cheesecake%2C%2017%20Cleveland%20Pl%2C%20New%20York%2C%20NY"], ["Vuelta a Times Square para Broadway", "https://www.google.com/maps/dir/?api=1&origin=Hamburger%20America%2C%2051%20MacDougal%20St%2C%20New%20York%2C%20NY&destination=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&travelmode=transit"]], "2026-10-07": [["A pie: Ess-a-Bagel, MoMA y hotel", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Ess-a-Bagel%2C%20831%203rd%20Ave%2C%20New%20York%2C%20NY%7CMuseum%20of%20Modern%20Art%2C%2011%20W%2053rd%20St%2C%20New%20York%2C%20NY"], ["Al aeropuerto JFK (T8)", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=JFK%20Airport%20Terminal%208%2C%20Jamaica%2C%20NY&travelmode=transit"]], "2026-09-29": [["Del hotel a Hollywood Studios", "https://www.google.com/maps/dir/?api=1&origin=Sheraton%20Orlando%20Lake%20Buena%20Vista%20Resort%2C%2012205%20S%20Apopka%20Vineland%20Rd%2C%20Orlando%2C%20FL&destination=Disney%27s%20Hollywood%20Studios%2C%20Bay%20Lake%2C%20FL&travelmode=driving"]], "2026-09-30": [["Del hotel a Magic Kingdom", "https://www.google.com/maps/dir/?api=1&origin=Sheraton%20Orlando%20Lake%20Buena%20Vista%20Resort%2C%2012205%20S%20Apopka%20Vineland%20Rd%2C%20Orlando%2C%20FL&destination=Magic%20Kingdom%20Park%2C%20Bay%20Lake%2C%20FL&travelmode=driving"]], "2026-10-01": [["Del hotel a Animal Kingdom", "https://www.google.com/maps/dir/?api=1&origin=Sheraton%20Orlando%20Lake%20Buena%20Vista%20Resort%2C%2012205%20S%20Apopka%20Vineland%20Rd%2C%20Orlando%2C%20FL&destination=Disney%27s%20Animal%20Kingdom%20Theme%20Park%2C%20Bay%20Lake%2C%20FL&travelmode=driving"]]};
+  var ROUTES = {"2026-10-02": [["JFK T5 \u2192 hotel: AirTrain a Jamaica, metro E y F a 47-50 Sts", "https://www.google.com/maps/dir/?api=1&origin=JFK%20Airport%20Terminal%205%2C%20Jamaica%2C%20NY&destination=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&travelmode=transit"], ["Tarde a pie: tacos, Bryant Park y Grand Central", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Grand%20Central%20Terminal%2C%2089%20E%2042nd%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Los%20Tacos%20No.%201%2C%20229%20W%2043rd%20St%2C%20New%20York%2C%20NY%7CBryant%20Park%2C%20New%20York%2C%20NY"], ["Metro 4/5/6 al tranv\u00eda de Roosevelt Island", "https://www.google.com/maps/dir/?api=1&origin=Grand%20Central%20Terminal%2C%2089%20E%2042nd%20St%2C%20New%20York%2C%20NY&destination=Roosevelt%20Island%20Tramway%2C%20E%2060th%20St%20%26%202nd%20Ave%2C%20New%20York%2C%20NY&travelmode=transit"], ["En la isla: paseo hasta Southpoint al atardecer", "https://www.google.com/maps/dir/?api=1&origin=Roosevelt%20Island%20Tram%20Station%2C%20Roosevelt%20Island%2C%20NY&destination=Southpoint%20Park%2C%20Roosevelt%20Island%2C%20NY&travelmode=walking"], ["Vuelta en metro F y cena en Halal Guys", "https://www.google.com/maps/dir/?api=1&origin=Southpoint%20Park%2C%20Roosevelt%20Island%2C%20NY&destination=The%20Halal%20Guys%2C%20W%2053rd%20St%20%26%206th%20Ave%2C%20New%20York%2C%20NY&travelmode=transit"]], "2026-10-03": [["Metro al Little Island", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Little%20Island%2C%20Pier%2055%2C%20Hudson%20River%20Park%2C%20New%20York%2C%20NY&travelmode=transit"], ["A pie: L'Industrie, High Line y Chelsea Market", "https://www.google.com/maps/dir/?api=1&origin=Little%20Island%2C%20Pier%2055%2C%20Hudson%20River%20Park%2C%20New%20York%2C%20NY&destination=Gagosian%2C%20555%20W%2024th%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=L%27Industrie%20Pizzeria%2C%20104%20Christopher%20St%2C%20New%20York%2C%20NY%7CHigh%20Line%2C%20Gansevoort%20St%20entrance%2C%20New%20York%2C%20NY%7CChelsea%20Market%2C%2075%209th%20Ave%2C%20New%20York%2C%20NY"], ["Galer\u00edas de Chelsea y subida al Edge", "https://www.google.com/maps/dir/?api=1&origin=Gagosian%2C%20555%20W%2024th%20St%2C%20New%20York%2C%20NY&destination=Edge%2C%2030%20Hudson%20Yards%2C%20New%20York%2C%20NY&travelmode=walking"], ["Del Edge a Burger Joint", "https://www.google.com/maps/dir/?api=1&origin=Edge%2C%2030%20Hudson%20Yards%2C%20New%20York%2C%20NY&destination=Burger%20Joint%2C%20119%20W%2056th%20St%2C%20New%20York%2C%20NY&travelmode=transit"]], "2026-10-04": [["Metro a Barney Greengrass", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Barney%20Greengrass%2C%20541%20Amsterdam%20Ave%2C%20New%20York%2C%20NY&travelmode=transit"], ["A pie: museo, Levain y Central Park", "https://www.google.com/maps/dir/?api=1&origin=Barney%20Greengrass%2C%20541%20Amsterdam%20Ave%2C%20New%20York%2C%20NY&destination=Bethesda%20Terrace%2C%20Central%20Park%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=American%20Museum%20of%20Natural%20History%2C%20200%20Central%20Park%20W%2C%20New%20York%2C%20NY%7CLevain%20Bakery%2C%20167%20W%2074th%20St%2C%20New%20York%2C%20NY%7CBelvedere%20Castle%2C%20Central%20Park%2C%20New%20York%2C%20NY"], ["A pie: Strawberry Fields, Gray's Papaya y hotel", "https://www.google.com/maps/dir/?api=1&origin=Bethesda%20Terrace%2C%20Central%20Park%2C%20New%20York%2C%20NY&destination=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Strawberry%20Fields%2C%20Central%20Park%2C%20New%20York%2C%20NY%7CGray%27s%20Papaya%2C%202090%20Broadway%2C%20New%20York%2C%20NY"], ["Cena en 7th Street Burger", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=7th%20Street%20Burger%2C%20485%207th%20Ave%2C%20New%20York%2C%20NY&travelmode=walking"]], "2026-10-05": [["A pie a Port Authority", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Port%20Authority%20Bus%20Terminal%2C%20625%208th%20Ave%2C%20New%20York%2C%20NY&travelmode=walking"], ["Bus 111 a Jersey Gardens", "https://www.google.com/maps/dir/?api=1&origin=Port%20Authority%20Bus%20Terminal%2C%20625%208th%20Ave%2C%20New%20York%2C%20NY&destination=The%20Mills%20at%20Jersey%20Gardens%2C%20651%20Kapkowski%20Rd%2C%20Elizabeth%2C%20NJ&travelmode=transit"], ["Vuelta: Port Authority, Shake Shack y Times Square", "https://www.google.com/maps/dir/?api=1&origin=Port%20Authority%20Bus%20Terminal%2C%20625%208th%20Ave%2C%20New%20York%2C%20NY&destination=Times%20Square%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Shake%20Shack%20Theater%20District%2C%20691%208th%20Ave%2C%20New%20York%2C%20NY"], ["SUMMIT One Vanderbilt", "https://www.google.com/maps/dir/?api=1&origin=Times%20Square%2C%20New%20York%2C%20NY&destination=SUMMIT%20One%20Vanderbilt%2C%2045%20E%2042nd%20St%2C%20New%20York%2C%20NY&travelmode=walking"]], "2026-10-06": [["Metro a Russ & Daughters", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Russ%20%26%20Daughters%2C%20179%20E%20Houston%20St%2C%20New%20York%2C%20NY&travelmode=transit"], ["Metro al Memorial del 11-S", "https://www.google.com/maps/dir/?api=1&origin=Russ%20%26%20Daughters%2C%20179%20E%20Houston%20St%2C%20New%20York%2C%20NY&destination=9%2F11%20Memorial%20%26%20Museum%2C%20180%20Greenwich%20St%2C%20New%20York%2C%20NY&travelmode=transit"], ["A pie: Trinity, Wall Street y el ferry", "https://www.google.com/maps/dir/?api=1&origin=9%2F11%20Memorial%20%26%20Museum%2C%20180%20Greenwich%20St%2C%20New%20York%2C%20NY&destination=Whitehall%20Terminal%2C%204%20South%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Trinity%20Church%2C%2089%20Broadway%2C%20New%20York%2C%20NY%7CNew%20York%20Stock%20Exchange%2C%2011%20Wall%20St%2C%20New%20York%2C%20NY"], ["Del ferry a Vanessa's Dumplings", "https://www.google.com/maps/dir/?api=1&origin=Whitehall%20Terminal%2C%204%20South%20St%2C%20New%20York%2C%20NY&destination=Vanessa%27s%20Dumpling%20House%2C%20118A%20Eldridge%20St%2C%20New%20York%2C%20NY&travelmode=transit"], ["A pie: Eileen's y Hamburger America", "https://www.google.com/maps/dir/?api=1&origin=Vanessa%27s%20Dumpling%20House%2C%20118A%20Eldridge%20St%2C%20New%20York%2C%20NY&destination=Hamburger%20America%2C%2051%20MacDougal%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Eileen%27s%20Special%20Cheesecake%2C%2017%20Cleveland%20Pl%2C%20New%20York%2C%20NY"], ["Vuelta a Times Square para Broadway", "https://www.google.com/maps/dir/?api=1&origin=Hamburger%20America%2C%2051%20MacDougal%20St%2C%20New%20York%2C%20NY&destination=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&travelmode=transit"]], "2026-10-07": [["A pie: Ess-a-Bagel, MoMA y hotel", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&travelmode=walking&waypoints=Ess-a-Bagel%2C%20831%203rd%20Ave%2C%20New%20York%2C%20NY%7CMuseum%20of%20Modern%20Art%2C%2011%20W%2053rd%20St%2C%20New%20York%2C%20NY"], ["Al aeropuerto JFK (T8)", "https://www.google.com/maps/dir/?api=1&origin=Motto%20by%20Hilton%20New%20York%20City%20Times%20Square%2C%20152%20W%2048th%20St%2C%20New%20York%2C%20NY&destination=JFK%20Airport%20Terminal%208%2C%20Jamaica%2C%20NY&travelmode=transit"]], "2026-09-29": [["Del hotel a Hollywood Studios", "https://www.google.com/maps/dir/?api=1&origin=Sheraton%20Orlando%20Lake%20Buena%20Vista%20Resort%2C%2012205%20S%20Apopka%20Vineland%20Rd%2C%20Orlando%2C%20FL&destination=Disney%27s%20Hollywood%20Studios%2C%20Bay%20Lake%2C%20FL&travelmode=driving"]], "2026-09-30": [["Del hotel a Magic Kingdom", "https://www.google.com/maps/dir/?api=1&origin=Sheraton%20Orlando%20Lake%20Buena%20Vista%20Resort%2C%2012205%20S%20Apopka%20Vineland%20Rd%2C%20Orlando%2C%20FL&destination=Magic%20Kingdom%20Park%2C%20Bay%20Lake%2C%20FL&travelmode=driving"]], "2026-10-01": [["Del hotel a Animal Kingdom", "https://www.google.com/maps/dir/?api=1&origin=Sheraton%20Orlando%20Lake%20Buena%20Vista%20Resort%2C%2012205%20S%20Apopka%20Vineland%20Rd%2C%20Orlando%2C%20FL&destination=Disney%27s%20Animal%20Kingdom%20Theme%20Park%2C%20Bay%20Lake%2C%20FL&travelmode=driving"]]};
   var PRE = [
     ['2026-09-19','Entradas de Disney compradas (880 \u20ac, pagadas) y vinculadas en My Disney Experience','done'],
     ['2026-09-15','Booking: confirmar si el Motto est\u00e1 prepagado o se paga al llegar'],
@@ -3361,26 +3417,56 @@ li.tick.is-done::before{content:"\2713"!important;color:var(--stamp-txt)}
     });
   })();
 
-  /* ---------- Calculadora: impuesto, propina y euros ---------- */
+  /* ---------- Calculadoras (p\u00e1gina y Modo viaje): impuesto, propina y euros ---------- */
   (function(){
-    var A = document.getElementById('cAmt'); if (!A) return;
-    var T = document.getElementById('cTax'), P = document.getElementById('cTip'), R = document.getElementById('cRate');
-    var oT = document.getElementById('cOutTax'), oP = document.getElementById('cOutTip'), oS = document.getElementById('cOutTot'), note = document.getElementById('cRateNote');
-    var RK = 'usa2026.fx.v1';
+    var RK = 'usa2026.fx.v1', sets = [];
     function money(n){ return n.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}); }
-    function calc(){
-      var a = parseFloat(String(A.value).replace(',', '.')) || 0, t = parseFloat(T.value) || 0, p = parseFloat(P.value) || 0, r = parseFloat(String(R.value).replace(',', '.')) || 0;
-      var tax = a * t / 100, tip = a * p / 100, tot = a + tax + tip;
-      oT.textContent = money(tax) + ' $'; oP.textContent = money(tip) + ' $';
-      oS.textContent = money(tot) + ' $ \u00b7 ' + money(tot * r) + ' \u20ac';
+    ['c','p'].forEach(function(px){
+      var A = document.getElementById(px + 'Amt'); if (!A) return;
+      var S = {A:A, T:document.getElementById(px+'Tax'), P:document.getElementById(px+'Tip'), R:document.getElementById(px+'Rate'),
+               oT:document.getElementById(px+'OutTax'), oP:document.getElementById(px+'OutTip'), oS:document.getElementById(px+'OutTot'), note:document.getElementById(px+'RateNote')};
+      S.calc = function(){
+        var a = parseFloat(String(S.A.value).replace(',', '.')) || 0, t = parseFloat(S.T.value) || 0, p = parseFloat(S.P.value) || 0, r = parseFloat(String(S.R.value).replace(',', '.')) || 0;
+        var tax = a * t / 100, tip = a * p / 100, tot = a + tax + tip;
+        S.oT.textContent = money(tax) + ' $'; S.oP.textContent = money(tip) + ' $';
+        S.oS.textContent = money(tot) + ' $ \u00b7 ' + money(tot * r) + ' \u20ac';
+      };
+      [S.A, S.T, S.P, S.R].forEach(function(el){ el.addEventListener('input', S.calc); el.addEventListener('change', S.calc); });
+      sets.push(S);
+    });
+    if (!sets.length) return;
+    function fmtD(d){ var p = String(d).split('-'); return p.length === 3 ? (+p[2]) + ' ' + MESES[+p[1]-1].slice(0,3) + ' ' + p[0] : d; }
+    function setRate(r, d, live){
+      var today = keyOf(new Date());
+      var msg = live && d === today ? 'Cambio de hoy, ' + fmtD(d) + '.'
+              : live ? 'Cambio m\u00e1s reciente publicado: ' + fmtD(d) + '.'
+              : 'Sin conexi\u00f3n: cambio guardado del ' + fmtD(d) + '. Se actualizar\u00e1 al volver la conexi\u00f3n.';
+      sets.forEach(function(S){ S.R.value = r.toFixed(4); S.note.textContent = msg + ' La propina va sobre el precio sin impuesto.'; S.note.classList.toggle('stale', !live || d !== today); S.calc(); });
     }
-    [A, T, P, R].forEach(function(el){ el.addEventListener('input', calc); el.addEventListener('change', calc); });
-    try { var c = JSON.parse(localStorage.getItem(RK) || 'null'); if (c && c.r) { R.value = c.r.toFixed(3); note.textContent = 'Cambio del ' + c.d + '; se actualiza solo con conexi\u00f3n.'; } } catch(e){}
-    calc();
-    if (!window.fetch) return;
-    fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json').then(function(r){ return r.ok ? r.json() : null; })
-      .then(function(j){ if (!j || !j.usd || !j.usd.eur) return; var r = j.usd.eur; R.value = r.toFixed(3); note.textContent = 'Cambio del ' + j.date + '; se actualiza solo con conexi\u00f3n.';
-        try { localStorage.setItem(RK, JSON.stringify({r: r, d: j.date})); } catch(e){} calc(); }).catch(function(){});
+    try { var c = JSON.parse(localStorage.getItem(RK) || 'null'); if (c && c.r) setRate(c.r, c.d, false); } catch(e){}
+    sets.forEach(function(S){ S.calc(); });
+    var lastTry = 0;
+    function fetchRate(){
+      if (!window.fetch || Date.now() - lastTry < 60000) return; lastTry = Date.now();
+      var today = keyOf(new Date());
+      var urls = ['https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@' + today + '/v1/currencies/usd.min.json',
+                  'https://' + today + '.currency-api.pages.dev/v1/currencies/usd.min.json',
+                  'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json',
+                  'https://latest.currency-api.pages.dev/v1/currencies/usd.min.json'];
+      (function next(i){
+        if (i >= urls.length) return;
+        fetch(urls[i], {cache: 'no-store'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(j){
+          if (!j || !j.usd || !j.usd.eur) return next(i + 1);
+          setRate(j.usd.eur, j.date, true);
+          try { localStorage.setItem(RK, JSON.stringify({r: j.usd.eur, d: j.date})); } catch(e){}
+        }).catch(function(){ next(i + 1); });
+      })(0);
+    }
+    fetchRate();
+    // Cada vez que se usa la calculadora o se vuelve a la pagina, se comprueba de nuevo el cambio del dia
+    sets.forEach(function(S){ S.A.addEventListener('focus', fetchRate); });
+    document.addEventListener('visibilitychange', function(){ if (!document.hidden) fetchRate(); });
+    window.addEventListener('online', fetchRate);
   })();
 
   /* ---------- Respeta la preferencia de movimiento reducido en SVG ---------- */
